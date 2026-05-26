@@ -1,5 +1,10 @@
 window.Y6_SCENE_DATA = {
   title: "Y6 的五十年选择",
+  home: {
+    image: "scenes/images/home.png",
+    title: "Y6 的五十年选择",
+    description: "这是一段关于好奇心、选择与长期坚持的文字冒险。你将陪伴 Y6 走过五个关键年龄，在科研、胆识、共情、抱负与操守之间留下自己的轨迹。愿每一次选择，都让他更接近那个清醒、坚定，并终有一天能够当选院士的自己。"
+  },
   maxTrait: 12,
   routeCount: 243,
   traitLabels: {
@@ -13,7 +18,7 @@ window.Y6_SCENE_DATA = {
     {
       age: "0-8 岁",
       title: "木箱里的星空",
-      image: "scenes/images/childhood.svg",
+      image: "scenes/images/childhood.jpeg",
       description: "Y6 出生在一座临河小城。八岁那年，父亲带回一只坏掉的收音机，里面的线圈像一团安静的星云。家人问他：这个周末，你想做什么？",
       options: [
         {
@@ -44,7 +49,7 @@ window.Y6_SCENE_DATA = {
       variants: {
         research: {
           title: "拆开之后的报名表",
-          image: "scenes/images/contest.svg",
+          image: "scenes/images/contest.png",
           description: "收音机被修好的消息传到学校，物理老师把竞赛报名表放到 Y6 桌上，说他应该去看看更精密的世界。",
           options: [
             { branch: "research", title: "报名竞赛", text: "把好奇心交给题目检验。", effects: { research: 2, ambition: 1 }, scene: "他在旧教室里刷题到深夜，纸页边缘沾着铅笔灰。" },
@@ -54,7 +59,7 @@ window.Y6_SCENE_DATA = {
         },
         empathy: {
           title: "雨巷后的座位",
-          image: "scenes/images/classroom.svg",
+          image: "scenes/images/classroom.png",
           description: "邻居病好后送来一盏旧台灯。Y6 把它带到教室，老师注意到他总愿意把难题讲给旁边的人听。",
           options: [
             { branch: "empathy", title: "成立互助小组", text: "让落下的人也能跟上。", effects: { empathy: 2, integrity: 1 }, scene: "他把课间变成小小讲台，发现帮助别人也会反过来照亮自己。" },
@@ -64,7 +69,7 @@ window.Y6_SCENE_DATA = {
         },
         ambition: {
           title: "县城灯牌下的题",
-          image: "scenes/images/city.svg",
+          image: "scenes/images/city.png",
           description: "县城的霓虹让 Y6 意识到小城之外还有许多可能。回到学校后，他不再满足于只把课本读完。",
           options: [
             { branch: "ambition", title: "报名市级竞赛", text: "把自己放到更大的名单里。", effects: { ambition: 2, research: 1 }, scene: "报名表交上去时，他还不知道对手是谁，只知道不能一直站在原地。" },
@@ -79,7 +84,7 @@ window.Y6_SCENE_DATA = {
       variants: {
         research: {
           title: "实验室门口的四封信",
-          image: "scenes/images/lab.svg",
+          image: "scenes/images/lab.png",
           description: "多年竞赛和自学把 Y6 推到大学实验室门口。毕业前，他收到几封邀请，每一封都像一条不同的研究路径。",
           options: [
             { branch: "research", title: "进入基础研究", text: "继续追问最慢的问题。", effects: { research: 3, integrity: 1 }, scene: "实验室的灯一直亮到凌晨，只剩他的谱线还在屏幕上跳动。" },
@@ -89,7 +94,7 @@ window.Y6_SCENE_DATA = {
         },
         empathy: {
           title: "很多人等他回答",
-          image: "scenes/images/mountain.svg",
+          image: "scenes/images/mountain.png",
           description: "互助小组的经历让 Y6 习惯把选择和别人联系在一起。毕业季，他面对的不只是工作，而是要把能力带到哪里。",
           options: [
             { branch: "empathy", title: "去西部支教", text: "把知识带到更远的课堂。", effects: { empathy: 3, integrity: 1 }, scene: "高原教室的窗户漏风，孩子们却把问题问得很热。" },
@@ -99,7 +104,7 @@ window.Y6_SCENE_DATA = {
         },
         ambition: {
           title: "更大的系统",
-          image: "scenes/images/industry.svg",
+          image: "scenes/images/industry.png",
           description: "县城灯牌、竞赛名单和一次次公开表达，让 Y6 更早意识到平台的重要。毕业时，他想进入真正运转的大系统。",
           options: [
             { branch: "ambition", title: "接受外企 offer", text: "先见识成熟工业体系。", effects: { ambition: 2, research: 1 }, scene: "巨大的生产线像一条发光河流，Y6 学会了标准与效率。" },
@@ -114,7 +119,7 @@ window.Y6_SCENE_DATA = {
       variants: {
         research: {
           title: "数据没有照他说谎",
-          image: "scenes/images/data.svg",
+          image: "scenes/images/data.png",
           description: "长期研究让 Y6 拿到关键项目，却也让他面对连续失败。异常数据摆在屏幕上，团队等他决定该不该公开。",
           options: [
             { branch: "research", title: "公开失败数据", text: "用真实结果换下一次机会。", effects: { integrity: 3, research: 1 }, scene: "他把失败曲线投到大屏上，会议室安静得能听见笔帽落地。" },
@@ -124,7 +129,7 @@ window.Y6_SCENE_DATA = {
         },
         empathy: {
           title: "一间教室变成许多间",
-          image: "scenes/images/team.svg",
+          image: "scenes/images/team.png",
           description: "无论支教、公益还是教育研究，Y6 都已经把自己放进了许多人的命运里。现在项目扩大，资源和人心同时紧张。",
           options: [
             { branch: "empathy", title: "保留一线课堂", text: "不让系统忘记具体的人。", effects: { empathy: 3, integrity: 1 }, scene: "他每月仍去听一节普通课，提醒团队数字背后有名字。" },
@@ -134,7 +139,7 @@ window.Y6_SCENE_DATA = {
         },
         ambition: {
           title: "增长曲线的阴影",
-          image: "scenes/images/capital.svg",
+          image: "scenes/images/capital.png",
           description: "平台、公司或项目都开始长大。Y6 站在增长曲线前，发现速度带来的不只是机会，还有被忽略的代价。",
           options: [
             { branch: "ambition", title: "继续快速扩张", text: "趁窗口期抢到位置。", effects: { ambition: 3, courage: 1 }, scene: "掌声很密，日程很满，Y6 发现速度也会制造盲区。" },
@@ -149,7 +154,7 @@ window.Y6_SCENE_DATA = {
       variants: {
         research: {
           title: "最后一份证据",
-          image: "scenes/images/academy.svg",
+          image: "scenes/images/academy.png",
           description: "Y6 站在报告厅后台。多年选择把他带回证据本身：要不要把最完整、也最不讨巧的结果交给所有人。",
           options: [
             { branch: "research", title: "坚持长期基础问题", text: "把十年数据完整公开。", effects: { research: 3, integrity: 2 }, scene: "他没有讲最热闹的概念，只讲最扎实的证据。" },
@@ -159,7 +164,7 @@ window.Y6_SCENE_DATA = {
         },
         empathy: {
           title: "许多人的回声",
-          image: "scenes/images/teaching.svg",
+          image: "scenes/images/teaching.png",
           description: "五十岁时，Y6 收到来自不同城市、学校和实验室的来信。那些被他帮助过的人，反过来构成了他的履历。",
           options: [
             { branch: "empathy", title: "退到一线教学", text: "把故事讲给下一代。", effects: { empathy: 3, integrity: 1 }, scene: "他把第一只收音机放在讲台上，教室里传来年轻的笑声。" },
@@ -169,7 +174,7 @@ window.Y6_SCENE_DATA = {
         },
         ambition: {
           title: "掌声之前的选择",
-          image: "scenes/images/vote.svg",
+          image: "scenes/images/vote.png",
           description: "Y6 的名字已经和项目、公司或平台绑在一起。最后一次关键投票前，他必须决定自己要把影响力投向哪里。",
           options: [
             { branch: "ambition", title: "接受资本扩张", text: "用规模追赶窗口期。", effects: { ambition: 3, courage: 1 }, scene: "掌声涌来时，他知道自己选择了最亮也最陡的路。" },
@@ -186,7 +191,7 @@ window.Y6_SCENE_DATA = {
       type: "bad",
       title: "坏结局：失控扩张的代价",
       test: { min: { ambition: 10 }, max: { integrity: 3, empathy: 4 } },
-      image: "scenes/images/capital.svg",
+      image: "scenes/images/capital.png",
       description: "Y6 把速度当成唯一答案，项目和资本一路膨胀，却没有留下足够的审查、伦理和照顾。五十岁那年，公司仍在发布会上闪闪发光，但几起事故让他明白：没有操守和共情托底的野心，会把成功也变成债务。"
     },
     {
@@ -194,7 +199,7 @@ window.Y6_SCENE_DATA = {
       type: "bad",
       title: "坏结局：孤岛里的天才",
       test: { min: { research: 10 }, max: { empathy: 3, integrity: 5 } },
-      image: "scenes/images/lab.svg",
+      image: "scenes/images/lab.png",
       description: "Y6 的论文足够漂亮，数据也足够坚硬，可他越来越少听见别人说话。学生离开，合作者沉默，实验室像一座亮着灯的孤岛。后来有人引用他的成果，却很少有人愿意提起和他一起工作的日子。"
     },
     {
@@ -202,7 +207,7 @@ window.Y6_SCENE_DATA = {
       type: "bad",
       title: "坏结局：被耗尽的善意",
       test: { min: { empathy: 10 }, max: { ambition: 4, research: 5, integrity: 4 } },
-      image: "scenes/images/teaching.svg",
+      image: "scenes/images/teaching.png",
       description: "Y6 总是先回应别人的需要，却长期没有为自己的能力、边界和系统建设留下空间。他帮助了许多人，也被无数临时的求助拖垮。五十岁时，他仍被人感激，却已经很难再点亮自己。"
     },
     {
@@ -210,7 +215,7 @@ window.Y6_SCENE_DATA = {
       type: "bad",
       title: "坏结局：勇气变成鲁莽",
       test: { min: { courage: 6, ambition: 7 }, max: { research: 5, integrity: 2 } },
-      image: "scenes/images/crisis.svg",
+      image: "scenes/images/crisis.png",
       description: "Y6 习惯在压力里拍板，也习惯把迟疑看成软弱。几次冒险确实让他冲出重围，直到一次没有被充分验证的决定击穿了底线。那之后，他才明白勇气如果不受证据和操守约束，只是另一种危险。"
     },
     {
@@ -218,7 +223,7 @@ window.Y6_SCENE_DATA = {
       type: "bad",
       title: "坏结局：迟迟没有抵达",
       test: { max: { research: 4, ambition: 3, courage: 3, integrity: 3 } },
-      image: "scenes/images/river.svg",
+      image: "scenes/images/river.png",
       description: "Y6 一直想选择更稳妥的路，却在关键时刻反复绕开难题。五十岁时，他没有犯下大错，也没有真正完成自己想做的事。河水仍旧流过小城，他终于承认：不选择，也是一种选择。"
     },
     {
@@ -226,7 +231,7 @@ window.Y6_SCENE_DATA = {
       type: "good",
       title: "好结局：中国科学院院士",
       test: { min: { research: 10, integrity: 6 } },
-      image: "scenes/images/academy.svg",
+      image: "scenes/images/academy.png",
       description: "Y6 因在基础科学领域做出系统性、原创性贡献，并长期坚持公开、严谨的学术规范，当选中国科学院院士。领奖那天，他想起八岁拆开的收音机：原来一生的回声，从那枚小小螺丝就开始了。"
     },
     {
@@ -234,7 +239,7 @@ window.Y6_SCENE_DATA = {
       type: "good",
       title: "好结局：公共科学的建设者",
       test: { min: { research: 6, empathy: 5, integrity: 5 } },
-      image: "scenes/images/institute.svg",
+      image: "scenes/images/institute.png",
       description: "Y6 没有只追逐个人荣誉，而是把数据、课程和设备变成公共基础设施。许多年轻团队从他的开放平台起步，后来又把新的发现归还给更多人。"
     },
     {
@@ -242,7 +247,7 @@ window.Y6_SCENE_DATA = {
       type: "good",
       title: "好结局：技术公司的掌舵者",
       test: { min: { ambition: 8, courage: 4, integrity: 1 } },
-      image: "scenes/images/capital.svg",
+      image: "scenes/images/capital.png",
       description: "Y6 把研究经验转化成工程平台，创办的公司改变了一个行业。他没有获得最安静的书房，却在最喧闹的战场里保住了技术底线。"
     },
     {
@@ -250,7 +255,7 @@ window.Y6_SCENE_DATA = {
       type: "good",
       title: "好结局：改变许多人的老师",
       test: { min: { empathy: 8, integrity: 4 } },
-      image: "scenes/images/teaching.svg",
+      image: "scenes/images/teaching.png",
       description: "Y6 没有把名字刻在最高的奖杯上，却把方法、勇气和诚实交给了一批又一批年轻人。许多年后，有学生说：我的人生，是从听见他那句话开始转弯的。"
     },
     {
@@ -258,7 +263,7 @@ window.Y6_SCENE_DATA = {
       type: "good",
       title: "好结局：开放研究制度的改革者",
       test: { min: { research: 7, empathy: 6 } },
-      image: "scenes/images/institute.svg",
+      image: "scenes/images/institute.png",
       description: "Y6 建起开放数据库和共享实验平台，让许多原本彼此独立的团队彼此看见。他的贡献不只是一篇论文，而是一种让知识流动的制度。"
     },
     {
@@ -266,7 +271,7 @@ window.Y6_SCENE_DATA = {
       type: "good",
       title: "好结局：稳健的长期主义者",
       test: { min: { research: 5, empathy: 5, integrity: 3 } },
-      image: "scenes/images/team.svg",
+      image: "scenes/images/team.png",
       description: "Y6 没有在某一项属性上走到极端，却把研究、组织、共情和操守稳定地放在同一张桌上。他的成就不总是耀眼，但足够耐久，也足够让身边的人安心。"
     },
     {
@@ -274,7 +279,7 @@ window.Y6_SCENE_DATA = {
       type: "mixed",
       title: "灰色结局：盛名之下",
       test: { min: { ambition: 8 }, max: { empathy: 5 } },
-      image: "scenes/images/vote.svg",
+      image: "scenes/images/vote.png",
       description: "Y6 得到了名声、平台和很多掌声，却越来越难分辨哪些关系还是真实的。他没有彻底失败，也没有真正轻松。人们说他成功，他自己却偶尔怀念那个还能慢慢修收音机的下午。"
     },
     {
@@ -282,7 +287,7 @@ window.Y6_SCENE_DATA = {
       type: "mixed",
       title: "灰色结局：安静的研究者",
       test: { min: { research: 7 }, max: { ambition: 5 } },
-      image: "scenes/images/lab.svg",
+      image: "scenes/images/lab.png",
       description: "Y6 留在不太被看见的研究角落里，做出了一些扎实但传播有限的工作。他没有站上最高领奖台，也没有被潮水卷走。对他来说，这是一种遗憾，也是一种保全。"
     },
     {
@@ -290,7 +295,7 @@ window.Y6_SCENE_DATA = {
       type: "neutral",
       title: "结局：清醒而普通的一生",
       test: {},
-      image: "scenes/images/river.svg",
+      image: "scenes/images/river.png",
       description: "Y6 没有站到聚光灯中央，但他保留了选择的能力：知道何时前进，何时停下，何时对一个具体的人负责。五十岁那年，他发现这也是一种完整。"
     }
   ]

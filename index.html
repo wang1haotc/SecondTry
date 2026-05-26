@@ -50,9 +50,10 @@
     }
 
     .game {
-      width: min(1220px, 100%);
-      height: min(840px, calc(100vh - 36px));
-      min-height: 680px;
+      width: min(calc((100vh - 36px) * 16 / 9), calc(100vw - 36px), 1366px);
+      aspect-ratio: 16 / 9;
+      min-height: 0;
+      height: auto;
       overflow: hidden;
       position: relative;
       border: 1px solid var(--line);
@@ -66,8 +67,58 @@
       inset: 0;
       width: 100%;
       height: 100%;
+      aspect-ratio: 16 / 9;
       object-fit: cover;
       background: #111827;
+    }
+
+    .home-screen {
+      position: absolute;
+      inset: 0;
+      z-index: 4;
+      display: grid;
+      place-items: center;
+      padding: 28px;
+      background: rgba(5, 9, 18, 0.28);
+    }
+
+    .home-panel {
+      width: min(720px, 100%);
+      padding: clamp(24px, 5vw, 44px);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 8px;
+      background: rgba(8, 13, 24, 0.42);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+      text-align: center;
+      backdrop-filter: blur(10px);
+    }
+
+    .home-title {
+      margin: 0;
+      color: #fff3c8;
+      font-size: clamp(30px, 5vw, 54px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .home-description {
+      margin: 18px auto 0;
+      max-width: 620px;
+      color: #eef4ff;
+      font-size: clamp(15px, 1.55vw, 19px);
+      line-height: 1.78;
+    }
+
+    .home-start {
+      min-height: 46px;
+      margin-top: 26px;
+      padding: 0 24px;
+      border: 0;
+      border-radius: 8px;
+      color: #101828;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      font-weight: 900;
     }
 
     .shade {
@@ -334,6 +385,21 @@
       background: rgba(255, 255, 255, 0.1);
     }
 
+    .tertiary {
+      min-height: 42px;
+      padding: 0 16px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      color: var(--ink);
+      cursor: pointer;
+      background: rgba(8, 13, 24, 0.34);
+      font-weight: 800;
+    }
+
+    body.is-home .story {
+      visibility: hidden;
+    }
+
     .history {
       max-height: 180px;
       overflow: auto;
@@ -372,28 +438,29 @@
       }
 
       .game {
-        width: 100%;
+        width: min(100vw, calc(100vh * 16 / 9));
         height: auto;
-        min-height: 100vh;
+        min-height: 0;
+        aspect-ratio: 16 / 9;
         border-radius: 0;
         border: 0;
       }
 
       .scene-image {
-        position: fixed;
+        position: absolute;
       }
 
       .shade {
-        position: fixed;
+        position: absolute;
         background:
           linear-gradient(0deg, rgba(5, 9, 18, 0.78) 0%, rgba(5, 9, 18, 0.2) 58%, rgba(5, 9, 18, 0.46) 100%);
       }
 
       .hud {
-        position: relative;
-        inset: auto;
+        position: absolute;
+        inset: 12px 12px auto 12px;
         flex-direction: column;
-        padding: 14px;
+        padding: 0;
       }
 
       .brand,
@@ -406,17 +473,27 @@
       }
 
       .story {
-        position: relative;
-        left: auto;
-        right: auto;
-        bottom: auto;
+        position: absolute;
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
         grid-template-columns: 1fr;
-        padding: 14px;
-        margin-top: min(24vh, 190px);
+        padding: 0;
+        margin-top: 0;
       }
 
       .story-title {
-        font-size: clamp(24px, 8vw, 34px);
+        font-size: clamp(18px, 5vw, 28px);
+      }
+
+      .description {
+        font-size: clamp(12px, 3.2vw, 15px);
+        line-height: 1.55;
+      }
+
+      .choice {
+        min-height: 42px;
+        padding: 7px 9px;
       }
 
       .choices {
@@ -439,7 +516,7 @@
 
       .narrative {
         min-height: auto;
-        padding: 14px;
+        padding: 12px;
       }
 
       .trait {
@@ -453,6 +530,14 @@
     <section class="game" aria-label="Y6 的五十年文字冒险游戏">
       <img id="sceneImage" class="scene-image" alt="当前剧情画面">
       <div class="shade" aria-hidden="true"></div>
+
+      <section id="homeScreen" class="home-screen" aria-label="游戏首页">
+        <div class="home-panel">
+          <h2 id="homeTitle" class="home-title"></h2>
+          <p id="homeDescription" class="home-description"></p>
+          <button id="startButton" class="home-start" type="button">开始游戏</button>
+        </div>
+      </section>
 
       <header class="hud">
         <div class="brand">
@@ -484,6 +569,7 @@
           <div id="history" class="history" hidden></div>
           <div id="endingActions" class="ending-actions" hidden>
             <button class="primary" id="restartButton" type="button">重新开始</button>
+            <button class="tertiary" id="homeButton" type="button">回到首页</button>
             <button class="secondary" id="shareButton" type="button">复制人生摘要</button>
           </div>
         </article>
@@ -509,6 +595,7 @@
 
     const traits = Object.fromEntries(Object.keys(data.traitLabels).map(key => [key, 0]));
     const maxTrait = data.maxTrait || 12;
+    let screen = "home";
     let roundIndex = 0;
     let history = [];
     let finalEnding = null;
@@ -528,13 +615,20 @@
     const endingActions = document.getElementById("endingActions");
     const historyNode = document.getElementById("history");
     const gameTitle = document.getElementById("gameTitle");
+    const homeScreen = document.getElementById("homeScreen");
+    const homeTitle = document.getElementById("homeTitle");
+    const homeDescription = document.getElementById("homeDescription");
     const imageExtensions = [".jpg", ".jpeg", ".png", ".webp", ".gif", ".avif", ".svg"];
     let imageFallbackQueue = [];
 
     gameTitle.textContent = data.title || "Y6 的五十年选择";
     document.title = gameTitle.textContent;
+    homeTitle.textContent = data.home?.title || data.title || "Y6 的五十年选择";
+    homeDescription.textContent = data.home?.description || "";
 
+    document.getElementById("startButton").addEventListener("click", startGame);
     document.getElementById("restartButton").addEventListener("click", restart);
+    document.getElementById("homeButton").addEventListener("click", goHome);
     document.getElementById("shareButton").addEventListener("click", copySummary);
     sceneImage.addEventListener("error", () => {
       const nextImage = imageFallbackQueue.shift();
@@ -604,6 +698,29 @@
       });
     }
 
+    function resetGameState() {
+      Object.keys(traits).forEach(key => {
+        traits[key] = 0;
+      });
+      roundIndex = 0;
+      history = [];
+      finalEnding = null;
+      previousBranch = null;
+      currentScene = makeRoundScene(activeRound());
+    }
+
+    function startGame() {
+      screen = "game";
+      resetGameState();
+      render();
+    }
+
+    function goHome() {
+      screen = "home";
+      resetGameState();
+      render();
+    }
+
     function choose(option, optionIndex) {
       const round = activeRound();
       addEffects(option.effects);
@@ -657,14 +774,8 @@
     }
 
     function restart() {
-      Object.keys(traits).forEach(key => {
-        traits[key] = 0;
-      });
-      roundIndex = 0;
-      history = [];
-      finalEnding = null;
-      previousBranch = null;
-      currentScene = makeRoundScene(activeRound());
+      screen = "game";
+      resetGameState();
       render();
     }
 
@@ -731,6 +842,20 @@
     }
 
     function render() {
+      homeScreen.hidden = screen !== "home";
+      document.body.classList.toggle("is-home", screen === "home");
+
+      if (screen === "home") {
+        setSceneImage(data.home?.image || "scenes/images/home.svg");
+        sceneImage.alt = data.home?.title || data.title || "游戏首页背景";
+        renderTraits();
+        choices.hidden = true;
+        endingActions.hidden = true;
+        historyNode.hidden = true;
+        lastChoice.hidden = true;
+        return;
+      }
+
       storyTitle.textContent = currentScene.title;
       description.textContent = currentScene.description;
       ageTag.textContent = currentScene.age;

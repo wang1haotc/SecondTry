@@ -11,6 +11,7 @@
 场景文字、选项、属性变化和图片路径都放在 `scenes/scenes.js`。
 
 - 当前剧情为 5 幕，每幕 3 个选项，总完整路径数为 `3^5 = 243`。
+- 首页文案和背景图在 `home` 字段里配置，默认背景是 `scenes/images/home.svg`。
 - 第一幕直接使用 `rounds[0].options`。
 - 第二幕开始，每一幕会根据上一幕选项里的 `branch` 读取 `variants.research`、`variants.empathy` 或 `variants.ambition`。
 - 修改每个 `variants` 里的 `title`、`description`、`image` 和 `options`，就能让下一幕跟上一选择连贯。
@@ -19,6 +20,7 @@
 - 结局按数组顺序优先匹配，坏结局可以放在前面，用来覆盖极端失衡的人物属性。
 - 替换或新增 `scenes/images/` 里的图片，可以自定义每一格画面，支持 `.jpg`、`.jpeg`、`.png`、`.webp`、`.gif`、`.avif`、`.svg`。
 - 如果配置里写的是 `scenes/images/childhood.svg`，但你把图片替换成了 `childhood.jpg` 或 `childhood.png`，页面会在 `.svg` 加载失败后自动尝试同名的常见图片后缀。
+- 首页背景同样支持替换为 jpg、png、webp 等格式；改文件名或替换同名图片即可。
 
 如果图片路径失效，页面会尝试使用 `scenes/images/default.svg` 作为兜底画面。
 
