@@ -1,0 +1,792 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Y6 的五十年选择</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: rgba(18, 25, 44, 0.88);
+      --panel-strong: rgba(24, 34, 58, 0.96);
+      --text: #f5f7fb;
+      --muted: #aeb8cc;
+      --accent: #f2c66d;
+      --accent-2: #70d6c4;
+      --danger: #ff8f70;
+      --line: rgba(255, 255, 255, 0.14);
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.36);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", Arial, sans-serif;
+      background:
+        radial-gradient(circle at 20% 8%, rgba(112, 214, 196, 0.22), transparent 28%),
+        radial-gradient(circle at 80% 0%, rgba(242, 198, 109, 0.18), transparent 30%),
+        linear-gradient(135deg, #070b16 0%, #111c33 52%, #071018 100%);
+      overflow-x: hidden;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .app {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 28px;
+    }
+
+    .game {
+      width: min(1120px, 100%);
+      min-height: min(820px, calc(100vh - 56px));
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr) auto;
+      gap: 18px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.035));
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(22px);
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 4px 2px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .mark {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      border: 1px solid rgba(242, 198, 109, 0.46);
+      border-radius: 8px;
+      color: #111725;
+      background: linear-gradient(135deg, #ffe3a1, #70d6c4);
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(22px, 3vw, 34px);
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    .meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .progress {
+      width: 170px;
+      height: 8px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .progress span {
+      display: block;
+      height: 100%;
+      width: 0%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      transition: width 260ms ease;
+    }
+
+    .stage {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(300px, 0.65fr);
+      gap: 18px;
+      min-height: 0;
+    }
+
+    .image-wrap,
+    .story-panel,
+    .choices {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+
+    .image-wrap {
+      min-height: 460px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .scene-image {
+      width: 100%;
+      height: 100%;
+      min-height: 460px;
+      display: block;
+      object-fit: cover;
+    }
+
+    .age-tag {
+      position: absolute;
+      left: 18px;
+      top: 18px;
+      padding: 8px 11px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      color: #f8fbff;
+      background: rgba(7, 12, 23, 0.62);
+      font-size: 13px;
+      font-weight: 700;
+      backdrop-filter: blur(10px);
+    }
+
+    .story-panel {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 20px;
+      background: var(--panel-strong);
+    }
+
+    .story-title {
+      margin: 0 0 10px;
+      color: #fff2c9;
+      font-size: clamp(21px, 2.4vw, 30px);
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+
+    .description {
+      margin: 0;
+      color: #e9eef9;
+      font-size: clamp(17px, 1.6vw, 20px);
+      line-height: 1.72;
+    }
+
+    .last-choice {
+      margin-top: 14px;
+      padding-left: 13px;
+      border-left: 3px solid var(--accent-2);
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .traits {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .trait {
+      display: grid;
+      grid-template-columns: 64px 1fr 28px;
+      align-items: center;
+      gap: 9px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .trait-track {
+      height: 7px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .trait-track span {
+      display: block;
+      height: 100%;
+      width: 0%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #70d6c4, #f2c66d);
+      transition: width 260ms ease;
+    }
+
+    .choices {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      padding: 14px;
+    }
+
+    .choice {
+      min-height: 92px;
+      padding: 14px 14px 13px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 8px;
+      color: var(--text);
+      text-align: left;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.065);
+      transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+    }
+
+    .choice:hover,
+    .choice:focus-visible {
+      outline: none;
+      transform: translateY(-2px);
+      border-color: rgba(242, 198, 109, 0.8);
+      background: rgba(242, 198, 109, 0.14);
+    }
+
+    .choice strong {
+      display: block;
+      margin-bottom: 7px;
+      color: #fff0c4;
+      font-size: 15px;
+      line-height: 1.25;
+    }
+
+    .choice span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.42;
+    }
+
+    .ending-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .primary {
+      min-height: 42px;
+      padding: 0 16px;
+      border: 0;
+      border-radius: 8px;
+      color: #111725;
+      cursor: pointer;
+      background: linear-gradient(135deg, #ffe3a1, #70d6c4);
+      font-weight: 800;
+    }
+
+    .secondary {
+      min-height: 42px;
+      padding: 0 16px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 8px;
+      color: var(--text);
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.08);
+      font-weight: 700;
+    }
+
+    .history {
+      max-height: 230px;
+      overflow: auto;
+      margin-top: 12px;
+      padding-right: 4px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.62;
+    }
+
+    .history div {
+      padding: 7px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    @media (max-width: 860px) {
+      .app {
+        padding: 14px;
+      }
+
+      .game {
+        min-height: calc(100vh - 28px);
+      }
+
+      .topbar,
+      .stage {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .meta {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .progress {
+        width: 46vw;
+        min-width: 140px;
+      }
+
+      .image-wrap,
+      .scene-image {
+        min-height: 300px;
+      }
+
+      .choices {
+        grid-template-columns: 1fr;
+      }
+
+      .choice {
+        min-height: 76px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <section class="game" aria-label="Y6 的五十年文字冒险游戏">
+      <header class="topbar">
+        <div class="brand">
+          <div class="mark" aria-hidden="true">Y6</div>
+          <h1>Y6 的五十年选择</h1>
+        </div>
+        <div class="meta" aria-live="polite">
+          <span id="roundLabel">第 1 / 5 轮</span>
+          <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+        </div>
+      </header>
+
+      <section class="stage">
+        <div class="image-wrap">
+          <img id="sceneImage" class="scene-image" alt="当前剧情画面">
+          <div id="ageTag" class="age-tag"></div>
+        </div>
+
+        <article class="story-panel">
+          <div>
+            <h2 id="storyTitle" class="story-title"></h2>
+            <p id="description" class="description"></p>
+            <div id="lastChoice" class="last-choice" hidden></div>
+          </div>
+
+          <div>
+            <div class="traits" id="traits"></div>
+            <div id="history" class="history" hidden></div>
+            <div id="endingActions" class="ending-actions" hidden>
+              <button class="primary" id="restartButton" type="button">重新开始</button>
+              <button class="secondary" id="shareButton" type="button">复制人生摘要</button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <nav id="choices" class="choices" aria-label="玩家选项"></nav>
+    </section>
+  </main>
+
+  <script>
+    const traits = {
+      research: 0,
+      courage: 0,
+      empathy: 0,
+      ambition: 0,
+      integrity: 0
+    };
+
+    const traitLabels = {
+      research: "科研",
+      courage: "胆识",
+      empathy: "共情",
+      ambition: "抱负",
+      integrity: "操守"
+    };
+
+    const rounds = [
+      {
+        age: "0-8 岁",
+        title: "一只木箱里的星空",
+        description: "Y6 出生在一座临河小城。八岁那年，父亲带回一只坏掉的收音机，里面的线圈像一团安静的星云。家人问他：这个周末，你想做什么？",
+        palette: ["#162447", "#70d6c4", "#f2c66d"],
+        motif: "radio",
+        options: [
+          { title: "拆开收音机", text: "弄懂声音从哪里来。", effects: { research: 2, courage: 1 }, scene: "Y6 把螺丝排成一行，第一次相信世界可以被拆开，也可以被重新理解。", image: "radio" },
+          { title: "照顾生病的邻居", text: "把修理计划推迟一天。", effects: { empathy: 2, integrity: 1 }, scene: "他端着热粥穿过雨巷，记住了知识之外还有人的重量。", image: "rain" },
+          { title: "跟商队去县城", text: "看看更大的世界。", effects: { courage: 2, ambition: 1 }, scene: "县城的灯牌在车窗上倒流，Y6 心里第一次出现远方这个词。", image: "city" },
+          { title: "在河边画云", text: "把想象力留在纸上。", effects: { research: 1, empathy: 1, courage: 1 }, scene: "他画下云的形状，也画下风看不见的路径。", image: "river" }
+        ]
+      },
+      {
+        age: "12 岁",
+        title: "第一场竞赛前夜",
+        description: "中学老师发现 Y6 对物理题格外敏感，推荐他参加市里的科学竞赛。报名表放在桌上，窗外操场热闹得像另一个宇宙。",
+        palette: ["#192a56", "#f2c66d", "#ff8f70"],
+        motif: "school",
+        options: [
+          { title: "报名竞赛", text: "哪怕没有把握，也要试试。", effects: { research: 2, ambition: 1 }, scene: "他在旧教室里刷题到深夜，纸页边缘沾着粉笔灰。", image: "school" },
+          { title: "组织同学复习", text: "把方法讲给更多人。", effects: { empathy: 2, research: 1 }, scene: "黑板前的 Y6 讲得磕磕绊绊，却让一排眼睛亮了起来。", image: "class" },
+          { title: "去机械厂实习", text: "从机器的轰鸣里学东西。", effects: { courage: 1, research: 1, ambition: 1 }, scene: "机床的震动穿过掌心，他懂得公式必须落到钢铁上。", image: "factory" },
+          { title: "拒绝作弊答案", text: "朋友递来所谓内部题，他没有接。", effects: { integrity: 3 }, scene: "那张纸被雨水泡软，Y6 的心反而硬了起来。", image: "honor" }
+        ]
+      },
+      {
+        age: "22 岁",
+        title: "大学毕业的分岔口",
+        description: "Y6 收到四封邀请：顶尖实验室的研究生名额、创业团队的合伙协议、西部支教项目，以及一家外企的高薪 offer。",
+        palette: ["#102a43", "#70d6c4", "#d8b4fe"],
+        motif: "campus",
+        options: [
+          { title: "进入基础研究", text: "选择最慢、最硬的路。", effects: { research: 3, integrity: 1 }, scene: "实验室的灯一盏盏熄灭，只剩他的谱线还在屏幕上跳动。", image: "lab" },
+          { title: "加入创业团队", text: "把论文变成产品。", effects: { ambition: 2, courage: 2 }, scene: "他在白板上画出第一条产品曲线，风险像风一样灌进会议室。", image: "startup" },
+          { title: "去西部支教", text: "把知识带到更远的课堂。", effects: { empathy: 3, integrity: 1 }, scene: "高原教室的窗户漏风，孩子们却把问题问得很热。", image: "mountain" },
+          { title: "接受外企 offer", text: "先见识成熟工业体系。", effects: { ambition: 1, research: 1, courage: 1 }, scene: "巨大的生产线像一条发光河流，Y6 学会了标准与效率。", image: "industry" }
+        ]
+      },
+      {
+        age: "35 岁",
+        title: "项目濒临失败",
+        description: "Y6 负责的关键项目连续三次失败。经费紧张，团队动摇，有人建议把异常数据藏起来，先把阶段报告过掉。",
+        palette: ["#1b1f3b", "#ff8f70", "#70d6c4"],
+        motif: "crisis",
+        options: [
+          { title: "公开失败数据", text: "用真实结果换下一次机会。", effects: { integrity: 3, research: 1 }, scene: "他把失败曲线投到大屏上，会议室安静得能听见笔帽落地。", image: "data" },
+          { title: "重组团队方向", text: "砍掉漂亮但无用的部分。", effects: { courage: 2, ambition: 1, research: 1 }, scene: "一半方案被划掉，留下的线条少了，却更像路。", image: "team" },
+          { title: "申请跨学科合作", text: "承认自己需要别人。", effects: { empathy: 1, research: 2, courage: 1 }, scene: "不同领域的术语在桌上碰撞，慢慢拼出新的入口。", image: "collab" },
+          { title: "转去管理岗位", text: "把个人突破换成组织效率。", effects: { ambition: 2, empathy: 1 }, scene: "他离开实验台，开始学习让更多人的时间产生回声。", image: "office" }
+        ]
+      },
+      {
+        age: "50 岁",
+        title: "最后一次关键投票前",
+        description: "五十岁的 Y6 站在报告厅后台。过去的选择都像隐形的河流，汇到这一刻。门外，有四种声音同时召唤他。",
+        palette: ["#111827", "#f2c66d", "#70d6c4"],
+        motif: "hall",
+        options: [
+          { title: "坚持长期基础问题", text: "把十年数据完整公开。", effects: { research: 3, integrity: 2 }, scene: "他没有讲最热闹的概念，只讲最扎实的证据。", image: "academy" },
+          { title: "创办开放研究院", text: "让年轻人共享设备与数据。", effects: { empathy: 2, research: 1, ambition: 1 }, scene: "一扇新门打开，后来许多人从这里走向自己的山峰。", image: "institute" },
+          { title: "接受资本并快速扩张", text: "用规模追赶窗口期。", effects: { ambition: 3, courage: 1 }, scene: "掌声很密，日程很满，Y6 发现速度也会制造盲区。", image: "capital" },
+          { title: "退到一线教学", text: "把故事讲给下一代。", effects: { empathy: 3, integrity: 1 }, scene: "他把第一只收音机放在讲台上，教室里传来年轻的笑声。", image: "teaching" }
+        ]
+      }
+    ];
+
+    const endings = [
+      {
+        id: "academician",
+        title: "结局：当选中国科学院院士",
+        test: s => s.research >= 10 && s.integrity >= 6,
+        description: "Y6 因在基础科学领域做出系统性、原创性贡献，并长期坚持公开、严谨的学术规范，当选中国科学院院士。颁证那天，他想起八岁拆开的收音机：原来一生的回声，从那枚小小螺丝就开始了。",
+        image: "academy",
+        tone: ["#111827", "#f2c66d", "#70d6c4"]
+      },
+      {
+        id: "founder",
+        title: "结局：技术公司的掌舵者",
+        test: s => s.ambition >= 8 && s.courage >= 7,
+        description: "Y6 把研究经验转化成工程平台，创办的公司改变了一个行业。他没有获得最安静的书房，却得到了最喧闹的战场。",
+        image: "capital",
+        tone: ["#172554", "#93c5fd", "#f2c66d"]
+      },
+      {
+        id: "mentor",
+        title: "结局：改变许多人的老师",
+        test: s => s.empathy >= 8 && s.integrity >= 5,
+        description: "Y6 没有把名字刻在最高的奖杯上，却把方法、勇气和诚实交给了一批又一批年轻人。许多年后，有学生说：我的人生，是从听见他那句话开始转弯的。",
+        image: "teaching",
+        tone: ["#163020", "#70d6c4", "#f2c66d"]
+      },
+      {
+        id: "reformer",
+        title: "结局：开放研究制度的改革者",
+        test: s => s.research >= 7 && s.empathy >= 6,
+        description: "Y6 建起开放数据库和共享实验平台，让许多原本孤立的团队彼此看见。他的贡献不只是一篇论文，而是一种让知识流动的制度。",
+        image: "institute",
+        tone: ["#112033", "#70d6c4", "#d8b4fe"]
+      },
+      {
+        id: "ordinary",
+        title: "结局：清醒而普通的一生",
+        test: () => true,
+        description: "Y6 没有站到聚光灯中央，但他保留了选择的能力：知道何时前进，何时停下，何时对一个具体的人负责。五十岁那年，他发现这也是一种完整。",
+        image: "river",
+        tone: ["#0f172a", "#a7f3d0", "#f2c66d"]
+      }
+    ];
+
+    let roundIndex = 0;
+    let history = [];
+    let currentScene = {
+      title: rounds[0].title,
+      description: rounds[0].description,
+      age: rounds[0].age,
+      image: rounds[0].motif,
+      palette: rounds[0].palette
+    };
+    let finalEnding = null;
+
+    const sceneImage = document.getElementById("sceneImage");
+    const ageTag = document.getElementById("ageTag");
+    const storyTitle = document.getElementById("storyTitle");
+    const description = document.getElementById("description");
+    const choices = document.getElementById("choices");
+    const roundLabel = document.getElementById("roundLabel");
+    const progressBar = document.getElementById("progressBar");
+    const traitsNode = document.getElementById("traits");
+    const lastChoice = document.getElementById("lastChoice");
+    const endingActions = document.getElementById("endingActions");
+    const historyNode = document.getElementById("history");
+
+    document.getElementById("restartButton").addEventListener("click", restart);
+    document.getElementById("shareButton").addEventListener("click", copySummary);
+
+    function clamp(value, min, max) {
+      return Math.max(min, Math.min(max, value));
+    }
+
+    function addEffects(effects) {
+      Object.entries(effects).forEach(([key, value]) => {
+        traits[key] = clamp(traits[key] + value, 0, 12);
+      });
+    }
+
+    function choose(option, optionIndex) {
+      addEffects(option.effects);
+      history.push({
+        age: rounds[roundIndex].age,
+        title: option.title,
+        text: option.text,
+        scene: option.scene
+      });
+
+      roundIndex += 1;
+
+      if (roundIndex >= rounds.length) {
+        finalEnding = endings.find(ending => ending.test(traits));
+        currentScene = {
+          title: finalEnding.title,
+          description: finalEnding.description,
+          age: "结局",
+          image: finalEnding.image,
+          palette: finalEnding.tone
+        };
+      } else {
+        const next = rounds[roundIndex];
+        currentScene = {
+          title: next.title,
+          description: option.scene + " " + next.description,
+          age: next.age,
+          image: option.image,
+          palette: next.palette,
+          choiceIndex: optionIndex
+        };
+      }
+
+      render();
+    }
+
+    function restart() {
+      Object.keys(traits).forEach(key => {
+        traits[key] = 0;
+      });
+      roundIndex = 0;
+      history = [];
+      finalEnding = null;
+      currentScene = {
+        title: rounds[0].title,
+        description: rounds[0].description,
+        age: rounds[0].age,
+        image: rounds[0].motif,
+        palette: rounds[0].palette
+      };
+      render();
+    }
+
+    async function copySummary() {
+      const summary = [
+        "Y6 的五十年选择",
+        ...history.map(item => `${item.age}: ${item.title} - ${item.text}`),
+        finalEnding ? finalEnding.title : ""
+      ].filter(Boolean).join("\n");
+
+      try {
+        await navigator.clipboard.writeText(summary);
+        document.getElementById("shareButton").textContent = "已复制";
+        setTimeout(() => {
+          document.getElementById("shareButton").textContent = "复制人生摘要";
+        }, 1200);
+      } catch (error) {
+        document.getElementById("shareButton").textContent = "复制失败";
+      }
+    }
+
+    function renderTraits() {
+      traitsNode.innerHTML = "";
+      Object.entries(traitLabels).forEach(([key, label]) => {
+        const row = document.createElement("div");
+        row.className = "trait";
+        row.innerHTML = `
+          <span>${label}</span>
+          <span class="trait-track"><span style="width: ${(traits[key] / 12) * 100}%"></span></span>
+          <span>${traits[key]}</span>
+        `;
+        traitsNode.appendChild(row);
+      });
+    }
+
+    function renderChoices() {
+      choices.innerHTML = "";
+
+      if (finalEnding) {
+        choices.hidden = true;
+        endingActions.hidden = false;
+        historyNode.hidden = false;
+        historyNode.innerHTML = history.map(item => `<div><strong>${item.age}</strong>：${item.title}<br>${item.scene}</div>`).join("");
+        return;
+      }
+
+      choices.hidden = false;
+      endingActions.hidden = true;
+      historyNode.hidden = true;
+
+      rounds[roundIndex].options.forEach((option, index) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "choice";
+        button.innerHTML = `<strong>${index + 1}. ${option.title}</strong><span>${option.text}</span>`;
+        button.addEventListener("click", () => choose(option, index));
+        choices.appendChild(button);
+      });
+    }
+
+    function render() {
+      storyTitle.textContent = currentScene.title;
+      description.textContent = currentScene.description;
+      ageTag.textContent = currentScene.age;
+      sceneImage.src = makeSceneImage(currentScene);
+      sceneImage.alt = `${currentScene.age}：${currentScene.title}`;
+
+      const shownRound = finalEnding ? 5 : roundIndex + 1;
+      roundLabel.textContent = finalEnding ? "已抵达结局" : `第 ${shownRound} / 5 轮`;
+      progressBar.style.width = `${(shownRound / 5) * 100}%`;
+
+      if (history.length && !finalEnding) {
+        const item = history[history.length - 1];
+        lastChoice.hidden = false;
+        lastChoice.textContent = `上一选择：${item.title}。${item.scene}`;
+      } else {
+        lastChoice.hidden = true;
+      }
+
+      renderTraits();
+      renderChoices();
+    }
+
+    function makeSceneImage(scene) {
+      const [bg, accent, highlight] = scene.palette || ["#111827", "#70d6c4", "#f2c66d"];
+      const motif = scene.image || "river";
+      const svg = `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 780" role="img" aria-label="${escapeXml(scene.title)}">
+          <defs>
+            <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="${bg}"/>
+              <stop offset="0.58" stop-color="#111827"/>
+              <stop offset="1" stop-color="#050816"/>
+            </linearGradient>
+            <radialGradient id="glow" cx="70%" cy="22%" r="45%">
+              <stop offset="0" stop-color="${highlight}" stop-opacity="0.52"/>
+              <stop offset="1" stop-color="${highlight}" stop-opacity="0"/>
+            </radialGradient>
+            <filter id="soft">
+              <feGaussianBlur stdDeviation="10"/>
+            </filter>
+          </defs>
+          <rect width="1200" height="780" fill="url(#sky)"/>
+          <rect width="1200" height="780" fill="url(#glow)"/>
+          <circle cx="185" cy="130" r="82" fill="${accent}" opacity="0.14"/>
+          <circle cx="1040" cy="600" r="170" fill="${accent}" opacity="0.09" filter="url(#soft)"/>
+          ${motifSvg(motif, accent, highlight)}
+          <g transform="translate(555 330)">
+            <circle cx="0" cy="-72" r="46" fill="#f3d8b8"/>
+            <path d="M-68 88 C-58 5 -32 -35 0 -35 C34 -35 60 5 72 88 Z" fill="#26344f"/>
+            <path d="M-50 92 L52 92 L82 260 L-78 260 Z" fill="#192238"/>
+            <path d="M-42 10 C-8 38 10 38 44 10" fill="none" stroke="${highlight}" stroke-width="8" stroke-linecap="round" opacity="0.85"/>
+            <circle cx="-15" cy="-78" r="4" fill="#111827"/>
+            <circle cx="17" cy="-78" r="4" fill="#111827"/>
+            <path d="M-16 -54 C-5 -46 8 -46 20 -54" fill="none" stroke="#8b5e3c" stroke-width="4" stroke-linecap="round"/>
+          </g>
+          <g opacity="0.9">
+            <rect x="44" y="618" width="1112" height="86" rx="8" fill="#050816" fill-opacity="0.46" stroke="#ffffff" stroke-opacity="0.16"/>
+            <text x="76" y="671" fill="#f8fbff" font-size="34" font-family="Microsoft YaHei, Noto Sans SC, Arial" font-weight="800">${escapeXml(scene.title)}</text>
+          </g>
+        </svg>
+      `;
+      return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+    }
+
+    function motifSvg(motif, accent, highlight) {
+      const commonStars = `
+        <g opacity="0.78">
+          <circle cx="150" cy="220" r="3" fill="#fff"/>
+          <circle cx="270" cy="82" r="2" fill="#fff"/>
+          <circle cx="910" cy="120" r="3" fill="#fff"/>
+          <circle cx="1080" cy="265" r="2" fill="#fff"/>
+          <circle cx="790" cy="72" r="2" fill="#fff"/>
+        </g>
+      `;
+
+      const motifs = {
+        radio: `<g transform="translate(165 300)"><rect width="270" height="170" rx="22" fill="#222f4a" stroke="${highlight}" stroke-width="5"/><circle cx="78" cy="86" r="44" fill="none" stroke="${accent}" stroke-width="10"/><rect x="145" y="50" width="82" height="14" rx="7" fill="${highlight}"/><rect x="145" y="84" width="58" height="14" rx="7" fill="${accent}"/><path d="M28 0 L110 -95" stroke="${highlight}" stroke-width="7" stroke-linecap="round"/></g>`,
+        rain: `<g>${commonStars}<path d="M120 520 C250 450 330 580 470 500 C610 420 720 520 850 475 C990 425 1040 500 1160 460 L1160 780 L120 780 Z" fill="#101827"/><g stroke="${accent}" stroke-width="5" opacity="0.62"><path d="M180 180 l-32 62"/><path d="M300 135 l-32 62"/><path d="M920 170 l-32 62"/><path d="M1030 230 l-32 62"/></g></g>`,
+        city: `<g>${commonStars}<rect x="92" y="360" width="120" height="310" fill="#17233b"/><rect x="240" y="285" width="150" height="385" fill="#22304d"/><rect x="860" y="330" width="190" height="340" fill="#16243d"/><g fill="${highlight}" opacity="0.78"><rect x="275" y="330" width="24" height="32"/><rect x="330" y="390" width="24" height="32"/><rect x="905" y="390" width="26" height="34"/><rect x="970" y="455" width="26" height="34"/></g></g>`,
+        river: `<g>${commonStars}<path d="M0 575 C220 500 320 650 520 575 C720 500 840 650 1200 530 L1200 780 L0 780 Z" fill="${accent}" opacity="0.38"/><path d="M0 632 C260 570 360 700 590 625 C810 552 925 690 1200 604 L1200 780 L0 780 Z" fill="#07111f" opacity="0.8"/></g>`,
+        school: `<g><rect x="115" y="270" width="320" height="230" rx="8" fill="#26344f"/><rect x="150" y="315" width="250" height="135" fill="#101827" stroke="${accent}" stroke-width="6"/><text x="185" y="395" fill="${highlight}" font-size="54" font-family="Arial" font-weight="700">E=mc²</text><rect x="100" y="508" width="360" height="28" fill="#0f172a"/></g>`,
+        class: `<g><rect x="95" y="235" width="420" height="260" rx="8" fill="#122033"/><rect x="125" y="265" width="360" height="170" fill="#143c35" stroke="${highlight}" stroke-width="5"/><g fill="${accent}"><circle cx="170" cy="590" r="25"/><circle cx="250" cy="590" r="25"/><circle cx="330" cy="590" r="25"/></g></g>`,
+        factory: `<g><rect x="88" y="410" width="360" height="170" fill="#1f2937"/><path d="M90 410 L190 340 L190 410 L300 340 L300 410 L450 410" fill="#26344f"/><circle cx="270" cy="515" r="54" fill="none" stroke="${highlight}" stroke-width="15"/><path d="M725 510 H1090" stroke="${accent}" stroke-width="24" stroke-linecap="round"/></g>`,
+        honor: `<g><path d="M180 220 L430 280 L405 565 L180 625 L-45 565 L-70 280 Z" transform="translate(120 20)" fill="#18243b" stroke="${highlight}" stroke-width="8"/><path d="M230 385 L300 455 L425 310" fill="none" stroke="${accent}" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/></g>`,
+        campus: `<g>${commonStars}<path d="M100 560 L370 355 L640 560 Z" fill="#1f2b45"/><rect x="175" y="560" width="390" height="90" fill="#101827"/><g stroke="${highlight}" stroke-width="8"><path d="M225 560 V650"/><path d="M310 560 V650"/><path d="M395 560 V650"/><path d="M480 560 V650"/></g></g>`,
+        lab: `<g><rect x="110" y="240" width="320" height="430" rx="12" fill="#172033"/><g stroke="${accent}" stroke-width="8" fill="none"><path d="M210 305 V440 C170 500 175 575 270 575 C365 575 370 500 330 440 V305"/><path d="M210 305 H330"/></g><rect x="190" y="480" width="160" height="70" fill="${highlight}" opacity="0.5"/></g>`,
+        startup: `<g><rect x="100" y="230" width="370" height="260" rx="18" fill="#111827" stroke="${accent}" stroke-width="5"/><path d="M145 420 C220 315 315 375 420 285" fill="none" stroke="${highlight}" stroke-width="12" stroke-linecap="round"/><path d="M390 282 L430 282 L430 322" fill="none" stroke="${highlight}" stroke-width="12" stroke-linecap="round"/></g>`,
+        mountain: `<g>${commonStars}<path d="M0 650 L230 360 L415 650 Z" fill="#1e3a4a"/><path d="M260 650 L520 310 L805 650 Z" fill="#26344f"/><path d="M650 650 L930 360 L1200 650 Z" fill="#1e3a4a"/><rect x="145" y="500" width="190" height="115" fill="#192238" stroke="${highlight}" stroke-width="5"/></g>`,
+        industry: `<g><rect x="70" y="385" width="500" height="180" fill="#1f2937"/><g fill="${highlight}" opacity="0.75"><rect x="110" y="425" width="50" height="50"/><rect x="205" y="425" width="50" height="50"/><rect x="300" y="425" width="50" height="50"/></g><path d="M600 520 C735 450 850 590 1005 500" fill="none" stroke="${accent}" stroke-width="28" stroke-linecap="round"/></g>`,
+        crisis: `<g>${commonStars}<path d="M120 560 L400 280 L680 560" fill="none" stroke="${accent}" stroke-width="18" stroke-linejoin="round"/><path d="M820 230 L1050 560 H730 Z" fill="#2b1f2b" stroke="${highlight}" stroke-width="8"/></g>`,
+        data: `<g><rect x="100" y="240" width="430" height="300" rx="14" fill="#101827" stroke="${highlight}" stroke-width="5"/><polyline points="145,455 220,470 295,390 370,425 480,310" fill="none" stroke="${accent}" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/><g stroke="#5b6475" stroke-width="3"><path d="M145 500 H485"/><path d="M145 430 H485"/><path d="M145 360 H485"/></g></g>`,
+        team: `<g><circle cx="185" cy="370" r="50" fill="${accent}" opacity="0.88"/><circle cx="315" cy="300" r="50" fill="${highlight}" opacity="0.88"/><circle cx="430" cy="405" r="50" fill="#d8b4fe" opacity="0.88"/><g stroke="#ffffff" stroke-width="7" opacity="0.45"><path d="M225 355 L275 315"/><path d="M350 330 L398 380"/></g><rect x="115" y="505" width="390" height="68" rx="8" fill="#101827"/></g>`,
+        collab: `<g><rect x="85" y="270" width="170" height="170" rx="18" fill="${accent}" opacity="0.62"/><rect x="295" y="215" width="170" height="170" rx="18" fill="${highlight}" opacity="0.62"/><rect x="255" y="440" width="190" height="130" rx="18" fill="#d8b4fe" opacity="0.62"/><g stroke="#fff" stroke-width="8" opacity="0.5"><path d="M255 350 H295"/><path d="M340 385 L330 440"/></g></g>`,
+        office: `<g><rect x="90" y="250" width="420" height="320" rx="12" fill="#172033"/><rect x="130" y="295" width="120" height="90" fill="${accent}" opacity="0.75"/><rect x="275" y="295" width="190" height="34" fill="${highlight}" opacity="0.75"/><rect x="275" y="356" width="150" height="28" fill="#d8b4fe" opacity="0.65"/><rect x="130" y="430" width="335" height="92" fill="#0f172a"/></g>`,
+        hall: `<g>${commonStars}<path d="M170 650 V235 H1030 V650" fill="#101827" stroke="${highlight}" stroke-width="8"/><path d="M220 650 V305 H980 V650" fill="#18243b"/><circle cx="600" cy="280" r="72" fill="${accent}" opacity="0.55"/></g>`,
+        academy: `<g>${commonStars}<path d="M600 145 L705 360 L940 395 L770 560 L810 700 L600 625 L390 700 L430 560 L260 395 L495 360 Z" fill="${highlight}" opacity="0.22" stroke="${highlight}" stroke-width="9"/><circle cx="600" cy="425" r="128" fill="none" stroke="${accent}" stroke-width="18"/><path d="M520 425 H680 M600 345 V505" stroke="${highlight}" stroke-width="16" stroke-linecap="round"/></g>`,
+        institute: `<g><path d="M110 580 H520 V310 L315 205 L110 310 Z" fill="#172033" stroke="${highlight}" stroke-width="7"/><path d="M185 580 V390 H445 V580" fill="#101827" stroke="${accent}" stroke-width="7"/><g fill="${highlight}" opacity="0.78"><circle cx="230" cy="430" r="16"/><circle cx="315" cy="430" r="16"/><circle cx="400" cy="430" r="16"/></g></g>`,
+        capital: `<g><rect x="85" y="315" width="420" height="250" rx="18" fill="#111827" stroke="${highlight}" stroke-width="5"/><path d="M145 495 C210 450 210 385 295 388 C400 392 390 295 470 285" fill="none" stroke="${accent}" stroke-width="16" stroke-linecap="round"/><g fill="${highlight}"><circle cx="145" cy="495" r="14"/><circle cx="295" cy="388" r="14"/><circle cx="470" cy="285" r="14"/></g></g>`,
+        teaching: `<g><rect x="105" y="265" width="420" height="250" rx="10" fill="#143c35" stroke="${highlight}" stroke-width="7"/><path d="M170 365 H455 M170 425 H380" stroke="${accent}" stroke-width="12" stroke-linecap="round"/><g fill="${accent}" opacity="0.9"><circle cx="205" cy="620" r="30"/><circle cx="300" cy="620" r="30"/><circle cx="395" cy="620" r="30"/></g></g>`
+      };
+
+      return motifs[motif] || motifs.river;
+    }
+
+    function escapeXml(value) {
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    render();
+  </script>
+</body>
+</html>
