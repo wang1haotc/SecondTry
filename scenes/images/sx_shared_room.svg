@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 780" role="img" aria-label="Y6 and Su Xiao in a small shared room">
+  <defs>
+    <linearGradient id="room" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#17213b"/>
+      <stop offset=".55" stop-color="#1f2b45"/>
+      <stop offset="1" stop-color="#0a101d"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="780" fill="url(#room)"/>
+  <rect x="760" y="110" width="300" height="250" rx="8" fill="#0f172a" stroke="#f2c66d" stroke-width="8"/>
+  <circle cx="920" cy="210" r="58" fill="#f2c66d" opacity=".85"/>
+  <path d="M120 610 H1080 V780 H120 Z" fill="#08111f"/>
+  <rect x="210" y="430" width="430" height="105" rx="8" fill="#3b2f45"/>
+  <rect x="247" y="386" width="90" height="52" rx="5" fill="#f5e6c8"/>
+  <rect x="760" y="430" width="250" height="105" rx="8" fill="#1b2a46"/>
+  <g transform="translate(405 358)">
+    <circle cx="0" cy="-54" r="38" fill="#f1d1b3"/>
+    <path d="M-48 74 C-40 8 -24 -20 0 -20 C26 -20 43 8 52 74 Z" fill="#213250"/>
+    <circle cx="132" cy="-50" r="36" fill="#efc7aa"/>
+    <path d="M88 76 C95 8 110 -18 132 -18 C158 -18 176 8 184 76 Z" fill="#614466"/>
+  </g>
+  <g stroke="#70d6c4" stroke-width="6" stroke-linecap="round">
+    <path d="M340 486 H560"/><path d="M792 486 H968"/><path d="M792 510 H930"/>
+  </g>
+  <text x="76" y="704" fill="#fff2c9" font-family="Microsoft YaHei, Noto Sans SC, Arial" font-size="38" font-weight="800">一盏灯的房间</text>
+</svg>

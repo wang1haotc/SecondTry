@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 780" role="img" aria-label="Y6 and Su Xiao reading a star map">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#10172f"/>
+      <stop offset=".55" stop-color="#18213f"/>
+      <stop offset="1" stop-color="#07101f"/>
+    </linearGradient>
+    <radialGradient id="moon" cx="72%" cy="18%" r="32%">
+      <stop offset="0" stop-color="#ffe6a7" stop-opacity=".9"/>
+      <stop offset="1" stop-color="#ffe6a7" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="780" fill="url(#bg)"/>
+  <rect width="1200" height="780" fill="url(#moon)"/>
+  <g fill="#fff7dc" opacity=".8">
+    <circle cx="118" cy="92" r="3"/><circle cx="238" cy="178" r="2"/><circle cx="382" cy="104" r="3"/>
+    <circle cx="710" cy="126" r="2"/><circle cx="982" cy="86" r="3"/><circle cx="1080" cy="206" r="2"/>
+  </g>
+  <path d="M0 605 C170 560 290 610 430 575 C610 530 748 615 910 565 C1058 520 1125 545 1200 520 V780 H0 Z" fill="#08111f"/>
+  <g transform="translate(385 330)">
+    <circle cx="0" cy="-68" r="42" fill="#f1d1b3"/>
+    <path d="M-56 82 C-48 10 -28 -26 0 -26 C30 -26 52 10 61 82 Z" fill="#213250"/>
+    <circle cx="190" cy="-62" r="40" fill="#f0c9aa"/>
+    <path d="M132 84 C140 8 162 -22 190 -22 C218 -22 240 8 248 84 Z" fill="#4f3c62"/>
+    <path d="M-92 122 L304 122 L248 292 L-38 292 Z" fill="#e9dfc8"/>
+    <path d="M-54 155 C26 124 84 174 160 138 C204 118 238 129 272 150" fill="none" stroke="#426a8f" stroke-width="5"/>
+    <g fill="#f3c96b"><circle cx="20" cy="160" r="5"/><circle cx="110" cy="156" r="5"/><circle cx="210" cy="146" r="5"/></g>
+    <path d="M20 160 L110 156 L210 146" stroke="#f3c96b" stroke-width="3" opacity=".8"/>
+  </g>
+  <text x="72" y="688" fill="#fff5d1" font-family="Microsoft YaHei, Noto Sans SC, Arial" font-size="38" font-weight="800">星图下的约定</text>
+</svg>

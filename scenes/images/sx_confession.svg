@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 780" role="img" aria-label="Y6 confessing vulnerability to Su Xiao">
+  <defs>
+    <linearGradient id="night" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1a1f3a"/>
+      <stop offset=".52" stop-color="#111827"/>
+      <stop offset="1" stop-color="#071018"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="780" fill="url(#night)"/>
+  <rect x="94" y="130" width="470" height="330" rx="16" fill="#101827" stroke="#ff8f70" stroke-width="6"/>
+  <polyline points="145,370 220,386 300,300 380,344 506,238" fill="none" stroke="#ff8f70" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="640" y="130" width="400" height="330" rx="16" fill="#111d33" stroke="#70d6c4" stroke-width="6"/>
+  <path d="M705 255 H980 M705 315 H930 M705 375 H900" stroke="#70d6c4" stroke-width="10" stroke-linecap="round" opacity=".75"/>
+  <g transform="translate(430 520)">
+    <circle cx="0" cy="-54" r="38" fill="#f1d1b3"/><path d="M-50 80 C-40 8 -25 -20 0 -20 C28 -20 45 8 55 80 Z" fill="#26344f"/>
+    <circle cx="185" cy="-54" r="38" fill="#efc7aa"/><path d="M132 80 C142 8 158 -20 185 -20 C212 -20 230 8 240 80 Z" fill="#64466b"/>
+    <path d="M55 6 C88 28 108 28 132 6" fill="none" stroke="#f2c66d" stroke-width="8" stroke-linecap="round"/>
+  </g>
+  <text x="76" y="704" fill="#fff2c9" font-family="Microsoft YaHei, Noto Sans SC, Arial" font-size="38" font-weight="800">重新成为队友</text>
+</svg>
