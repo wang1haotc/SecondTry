@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900">
+  <defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#18223d"/><stop offset="1" stop-color="#0b1020"/></linearGradient></defs>
+  <rect width="1400" height="900" fill="url(#g)"/><circle cx="1050" cy="180" r="180" fill="#ffd166" opacity=".25"/><rect x="170" y="520" width="310" height="190" rx="22" fill="#25314f" stroke="#ffd166" stroke-width="8"/><circle cx="270" cy="616" r="54" fill="none" stroke="#4ecdc4" stroke-width="14"/><path d="M210 520 355 380" stroke="#ffd166" stroke-width="10" stroke-linecap="round"/><text x="90" y="150" fill="#fff7d6" font-family="Microsoft YaHei, Arial" font-size="64" font-weight="800">木箱里的星空</text>
+</svg>

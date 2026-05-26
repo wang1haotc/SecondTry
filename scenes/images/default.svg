@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900">
+  <defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#0f172a"/><stop offset="1" stop-color="#12333a"/></linearGradient></defs>
+  <rect width="1400" height="900" fill="url(#g)"/><circle cx="1040" cy="180" r="190" fill="#ffd166" opacity=".24"/><path d="M0 690C210 590 330 760 540 650s360 60 520 0 250-30 340 10v240H0z" fill="#06101e" opacity=".9"/><text x="90" y="160" fill="#f8fafc" font-family="Microsoft YaHei, Arial" font-size="64" font-weight="800">Y6 的选择</text>
+</svg>

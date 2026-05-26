@@ -1,0 +1,3 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900">
+  <rect width="1400" height="900" fill="#112033"/><circle cx="260" cy="430" r="70" fill="#ffd166" opacity=".86"/><circle cx="440" cy="350" r="70" fill="#4ecdc4" opacity=".86"/><circle cx="620" cy="470" r="70" fill="#d8b4fe" opacity=".86"/><g stroke="#fff" stroke-width="10" opacity=".45"><path d="M315 405l70-35"/><path d="M500 385l70 55"/></g><rect x="160" y="640" width="560" height="86" rx="12" fill="#0f172a"/><text x="90" y="150" fill="#f8fafc" font-family="Microsoft YaHei, Arial" font-size="64" font-weight="800">重组方向</text>
+</svg>
