@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Y6 的五十年选择</title>
+  <title>Y6 的长线选择</title>
   <style>
     :root {
       --bg: #080b12;
@@ -201,7 +201,9 @@
     }
 
     .stats {
-      width: min(270px, 30vw);
+      width: min(340px, 34vw);
+      max-height: min(52vh, 340px);
+      overflow: auto;
       padding: 9px 10px;
       border: 1px solid var(--line);
       border-radius: 8px;
@@ -227,7 +229,7 @@
 
     .trait {
       display: grid;
-      grid-template-columns: 46px 1fr 22px;
+      grid-template-columns: 58px 1fr 24px;
       align-items: center;
       gap: 7px;
       color: var(--muted);
@@ -326,7 +328,7 @@
     .choice {
       display: grid;
       gap: 3px;
-      min-height: 47px;
+      min-height: 43px;
       padding: 8px 10px;
       border: 1px solid rgba(255, 255, 255, 0.18);
       border-radius: 8px;
@@ -543,9 +545,9 @@
         <div class="brand">
           <div class="mark" aria-hidden="true">Y6</div>
           <div>
-            <h1 id="gameTitle">Y6 的五十年选择</h1>
+            <h1 id="gameTitle">Y6 的长线选择</h1>
             <div class="round" aria-live="polite">
-              <span id="roundLabel">第 1 / 5 轮</span>
+              <span id="roundLabel">第 1 / 13 轮</span>
               <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
             </div>
           </div>
@@ -621,9 +623,9 @@
     const imageExtensions = [".jpg", ".jpeg", ".png", ".webp", ".gif", ".avif", ".svg"];
     let imageFallbackQueue = [];
 
-    gameTitle.textContent = data.title || "Y6 的五十年选择";
+    gameTitle.textContent = data.title || "Y6 的长线选择";
     document.title = gameTitle.textContent;
-    homeTitle.textContent = data.home?.title || data.title || "Y6 的五十年选择";
+    homeTitle.textContent = data.home?.title || data.title || "Y6 的长线选择";
     homeDescription.textContent = data.home?.description || "";
 
     document.getElementById("startButton").addEventListener("click", startGame);
@@ -696,6 +698,15 @@
       Object.entries(effects || {}).forEach(([key, value]) => {
         traits[key] = clamp((traits[key] || 0) + value, 0, maxTrait);
       });
+    }
+
+    function optionVisible(option) {
+      return !option.showIf || testEnding(option.showIf, traits);
+    }
+
+    function availableOptions(round = activeRound()) {
+      const visible = (round.options || []).filter(optionVisible);
+      return visible.length ? visible : (round.options || []);
     }
 
     function resetGameState() {
@@ -781,7 +792,7 @@
 
     async function copySummary() {
       const summary = [
-        data.title || "Y6 的五十年选择",
+        data.title || "Y6 的长线选择",
         ...history.map(item => `${item.age}: ${item.title} - ${item.text}`),
         finalEnding ? finalEnding.title : ""
       ].filter(Boolean).join("\n");
@@ -831,7 +842,7 @@
       endingActions.hidden = true;
       historyNode.hidden = true;
 
-      activeRound().options.forEach((option, index) => {
+      availableOptions().forEach((option, index) => {
         const button = document.createElement("button");
         button.type = "button";
         button.className = "choice";

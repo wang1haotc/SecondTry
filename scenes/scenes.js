@@ -1,302 +1,280 @@
 window.Y6_SCENE_DATA = {
-  title: "Y6 的五十年选择",
+  title: "Y6 的长线选择",
   home: {
-    image: "scenes/images/home.png",
-    title: "Y6 的五十年选择",
-    description: "这是一段关于好奇心、选择与长期坚持的文字冒险。你将陪伴 Y6 走过五个关键年龄，在科研、胆识、共情、抱负与操守之间留下自己的轨迹。愿每一次选择，都让他更接近那个清醒、坚定，并终有一天能够当选院士的自己。"
+    image: "scenes/images/home-pro.png",
+    title: "Y6 的长线选择",
+    description: "从福建珑烟市的安静少年，到天天大学、清北大学业勒老师项目组，再到维娜盒欣公司的长期人生。你将陪 Y6 处理学业、科研、师门、职场和感情纠葛：什么时候坚持，什么时候表达，什么时候放下，什么时候走向真正稳定的关系。"
   },
-  maxTrait: 12,
-  routeCount: 243,
+  maxTrait: 16,
+  routeCount: "13 幕，每幕最多 4 个选项，含条件分支与多结局",
   traitLabels: {
     research: "科研",
     courage: "胆识",
     empathy: "共情",
     ambition: "抱负",
-    integrity: "操守"
+    integrity: "操守",
+    confidence: "自信",
+    communication: "表达",
+    clarity: "清醒",
+    yanAttachment: "颜执念",
+    shaoTrust: "邵信任",
+    mentorDependence: "师门依赖",
+    peerTrust: "同伴信任"
   },
   rounds: [
     {
-      age: "0-8 岁",
-      title: "木箱里的星空",
-      image: "scenes/images/childhood.jpeg",
-      description: "Y6 出生在一座临河小城。八岁那年，父亲带回一只坏掉的收音机，里面的线圈像一团安静的星云。家人问他：这个周末，你想做什么？",
+      age: "0-12 岁",
+      title: "珑烟市的窗边",
+      image: "scenes/images/longyan-study-pro.png",
+      description: "Y6 出生在福建珑烟市。小时候他总坐在窗边看书，能把一道题想一整个下午，也能因为一句重话沉默很久。家里人发现他爱学习，却也担心他太习惯一个人待着。",
       options: [
-        {
-          branch: "research",
-          title: "拆开收音机",
-          text: "弄懂声音从哪里来。",
-          effects: { research: 2, courage: 1 },
-          scene: "Y6 把螺丝排成一行，第一次相信世界可以被拆开，也可以被重新理解。"
-        },
-        {
-          branch: "empathy",
-          title: "照顾生病的邻居",
-          text: "把修理计划推迟一天。",
-          effects: { empathy: 2, integrity: 1 },
-          scene: "他端着热粥穿过雨巷，记住了知识之外还有人的重量。"
-        },
-        {
-          branch: "ambition",
-          title: "跟商队去县城",
-          text: "看看更大的世界。",
-          effects: { courage: 2, ambition: 1 },
-          scene: "县城的灯牌在车窗上倒流，Y6 心里第一次出现“远方”这个词。"
-        }
+        { branch: "research", title: "躲进题本", text: "把不安都交给演算。", effects: { research: 2, confidence: 1, communication: -1 }, scene: "Y6 在练习册边角写下密密麻麻的小字，世界变安静了，他也更不容易开口。" },
+        { branch: "communication", title: "参加朗读小组", text: "试着让声音被听见。", effects: { communication: 2, confidence: 1, courage: 1 }, scene: "第一次站起来读课文时，他手心发冷，但还是把最后一个字念完了。" },
+        { branch: "empathy", title: "帮同桌补课", text: "把会的题讲给别人。", effects: { empathy: 2, peerTrust: 1, research: 1 }, scene: "他发现讲清楚一道题比自己做出来更难，也更像是在和人建立一座桥。" },
+        { branch: "courage", title: "面对被取笑", text: "不再把委屈全部吞下。", effects: { courage: 2, confidence: 1, integrity: 1 }, scene: "他没有吵赢所有人，但终于说出一句：我不喜欢你们这样叫我。" }
       ]
     },
     {
-      age: "12 岁",
-      variants: {
-        research: {
-          title: "拆开之后的报名表",
-          image: "scenes/images/contest.png",
-          description: "收音机被修好的消息传到学校，物理老师把竞赛报名表放到 Y6 桌上，说他应该去看看更精密的世界。",
-          options: [
-            { branch: "research", title: "报名竞赛", text: "把好奇心交给题目检验。", effects: { research: 2, ambition: 1 }, scene: "他在旧教室里刷题到深夜，纸页边缘沾着铅笔灰。" },
-            { branch: "empathy", title: "带同学一起复习", text: "把解题方法讲清楚。", effects: { empathy: 2, research: 1 }, scene: "黑板前的 Y6 讲得磕磕绊绊，却让一排眼睛亮了起来。" },
-            { branch: "ambition", title: "申请去机械厂参观", text: "想知道公式能不能落到钢铁上。", effects: { courage: 1, research: 1, ambition: 1 }, scene: "机床的震动穿过掌心，他开始把公式想象成会发热的零件。" }
-          ]
-        },
-        empathy: {
-          title: "雨巷后的座位",
-          image: "scenes/images/classroom.png",
-          description: "邻居病好后送来一盏旧台灯。Y6 把它带到教室，老师注意到他总愿意把难题讲给旁边的人听。",
-          options: [
-            { branch: "empathy", title: "成立互助小组", text: "让落下的人也能跟上。", effects: { empathy: 2, integrity: 1 }, scene: "他把课间变成小小讲台，发现帮助别人也会反过来照亮自己。" },
-            { branch: "research", title: "研究旧台灯电路", text: "从生活里拆出一个问题。", effects: { research: 2, empathy: 1 }, scene: "台灯忽明忽暗，他沿着电线找到接触不良的地方，也找到耐心。" },
-            { branch: "ambition", title: "竞选班干部", text: "试着承担更多人的秩序。", effects: { ambition: 1, empathy: 1, courage: 1 }, scene: "他第一次站在全班面前说话，声音发抖，但没有退回座位。" }
-          ]
-        },
-        ambition: {
-          title: "县城灯牌下的题",
-          image: "scenes/images/city.png",
-          description: "县城的霓虹让 Y6 意识到小城之外还有许多可能。回到学校后，他不再满足于只把课本读完。",
-          options: [
-            { branch: "ambition", title: "报名市级竞赛", text: "把自己放到更大的名单里。", effects: { ambition: 2, research: 1 }, scene: "报名表交上去时，他还不知道对手是谁，只知道不能一直站在原地。" },
-            { branch: "research", title: "泡在图书室", text: "先把底子补得更深。", effects: { research: 2, integrity: 1 }, scene: "图书室的尘埃在阳光里漂浮，他一本本抄下看不懂的公式。" },
-            { branch: "empathy", title: "帮同伴准备面试", text: "把见过的世界讲给别人听。", effects: { empathy: 2, courage: 1 }, scene: "他学着描述县城的街道，也学着听见别人眼里的羡慕和不安。" }
-          ]
-        }
-      }
+      age: "15 岁",
+      title: "县赛前的晚自习",
+      image: "scenes/images/classroom-pro.png",
+      description: "高中以后，Y6 的成绩越来越稳。老师建议他参加理科竞赛，同学也开始把他当成“会做题的人”。他喜欢这种确定感，却仍然害怕被太多人看见。",
+      options: [
+        { branch: "research", title: "报名竞赛", text: "用题目证明自己。", effects: { research: 2, ambition: 1, confidence: 1 }, scene: "他把报名表夹进书里，像把自己小心翼翼地放进更大的赛场。" },
+        { branch: "peer", title: "组建学习小组", text: "让同学一起往前走。", effects: { peerTrust: 2, empathy: 1, communication: 1 }, scene: "晚自习下课后，几个人围在他桌边，问题不再只是题目，也包括彼此的焦虑。" },
+        { branch: "courage", title: "向老师争取名额", text: "把想要说出口。", effects: { courage: 2, confidence: 1, ambition: 1 }, scene: "他在办公室门口站了很久，最后敲门进去，说自己想试一次。" },
+        { branch: "integrity", title: "拒绝抄答案", text: "不靠捷径换名次。", effects: { integrity: 2, peerTrust: 1, courage: 1 }, scene: "有人说他死板，他没有反驳，只把草稿纸翻回空白页重新算。" }
+      ]
+    },
+    {
+      age: "18 岁",
+      title: "天天大学录取通知书",
+      image: "scenes/images/tiantian-campus-pro.png",
+      description: "Y6 考上天天大学本科，第一次真正离开珑烟市。新校园很大，机会很多，连孤独都比过去宽阔。他要决定自己如何开始大学生活。",
+      options: [
+        { branch: "research", title: "泡在图书馆", text: "把基础打到更深。", effects: { research: 2, clarity: 1, communication: -1 }, scene: "他在书架间找到安全感，也慢慢意识到安全感不能只靠躲起来获得。" },
+        { branch: "peer", title: "加入科创社", text: "和别人一起做项目。", effects: { peerTrust: 2, communication: 1, courage: 1 }, scene: "第一次组会很混乱，他不太会插话，却认真记下每个人的想法。" },
+        { branch: "ambition", title: "盯准保研排名", text: "把目标写在床头。", effects: { ambition: 2, research: 1, mentorDependence: 1 }, scene: "排名表像一张地图，他开始相信只要足够努力，就能离更高的地方更近。" },
+        { branch: "confidence", title: "主动竞选班委", text: "训练自己的表达。", effects: { communication: 2, confidence: 1, courage: 1 }, scene: "他的演讲没有华丽句子，但句句具体，反而让人记住了这个安静的男生。" }
+      ]
+    },
+    {
+      age: "20 岁",
+      title: "本科实验室的门卡",
+      image: "scenes/images/undergrad-lab-pro.png",
+      description: "大二结束时，Y6 拿到实验室门卡。导师说他适合做长期问题，师兄却提醒他：会做事之外，还要学会和人协作。",
+      options: [
+        { branch: "research", title: "独自攻课题", text: "把最难的模块接下来。", effects: { research: 3, confidence: 1, peerTrust: -1 }, scene: "他连续几晚盯着数据跑通模型，却差点忘了告诉队友自己改了接口。" },
+        { branch: "peer", title: "写共享文档", text: "让协作不靠猜。", effects: { communication: 2, peerTrust: 2, integrity: 1 }, scene: "文档一开始没人看，但后来每个人都在上面留下了自己的注释。" },
+        { branch: "ambition", title: "申请清北夏令营", text: "提前触碰更高平台。", effects: { ambition: 2, research: 1, courage: 1 }, scene: "申请材料寄出去那天，他在邮件发送页面停了三秒，像把未来按下确认。" },
+        { branch: "clarity", title: "记录压力日记", text: "弄清楚自己为什么害怕。", effects: { clarity: 2, confidence: 1, integrity: 1 }, scene: "他写下：我不是不想和人靠近，我只是总怕自己说错。" }
+      ]
     },
     {
       age: "22 岁",
-      variants: {
-        research: {
-          title: "实验室门口的四封信",
-          image: "scenes/images/lab.png",
-          description: "多年竞赛和自学把 Y6 推到大学实验室门口。毕业前，他收到几封邀请，每一封都像一条不同的研究路径。",
-          options: [
-            { branch: "research", title: "进入基础研究", text: "继续追问最慢的问题。", effects: { research: 3, integrity: 1 }, scene: "实验室的灯一直亮到凌晨，只剩他的谱线还在屏幕上跳动。" },
-            { branch: "ambition", title: "加入创业团队", text: "把论文变成可用的产品。", effects: { ambition: 2, courage: 2 }, scene: "他在白板上画出第一条产品曲线，风险像风一样灌进会议室。" },
-            { branch: "empathy", title: "申请青年科普项目", text: "把复杂问题讲给更多人。", effects: { empathy: 2, research: 1 }, scene: "他第一次把实验画成孩子也能看懂的图，发现清楚比炫技更难。" }
-          ]
-        },
-        empathy: {
-          title: "很多人等他回答",
-          image: "scenes/images/mountain.png",
-          description: "互助小组的经历让 Y6 习惯把选择和别人联系在一起。毕业季，他面对的不只是工作，而是要把能力带到哪里。",
-          options: [
-            { branch: "empathy", title: "去西部支教", text: "把知识带到更远的课堂。", effects: { empathy: 3, integrity: 1 }, scene: "高原教室的窗户漏风，孩子们却把问题问得很热。" },
-            { branch: "research", title: "做教育技术研究", text: "用数据理解学习困难。", effects: { research: 2, empathy: 1 }, scene: "他把学生的错题整理成图谱，看见每个沉默背后都有原因。" },
-            { branch: "ambition", title: "加入公益基金会", text: "把小组经验放大成项目。", effects: { ambition: 2, empathy: 1 }, scene: "第一次项目会很嘈杂，但他终于能让更多课桌亮起灯。" }
-          ]
-        },
-        ambition: {
-          title: "更大的系统",
-          image: "scenes/images/industry.png",
-          description: "县城灯牌、竞赛名单和一次次公开表达，让 Y6 更早意识到平台的重要。毕业时，他想进入真正运转的大系统。",
-          options: [
-            { branch: "ambition", title: "接受外企 offer", text: "先见识成熟工业体系。", effects: { ambition: 2, research: 1 }, scene: "巨大的生产线像一条发光河流，Y6 学会了标准与效率。" },
-            { branch: "research", title: "进入工程研究院", text: "在规模化之前打磨技术。", effects: { research: 2, courage: 1 }, scene: "他把样机拆了又装，知道可靠性不是口号。" },
-            { branch: "empathy", title: "回乡办训练营", text: "让小城孩子也能看见远方。", effects: { empathy: 2, ambition: 1 }, scene: "他把县城见闻做成课程，教室里有人第一次说想去更远的地方。" }
-          ]
-        }
-      }
+      title: "清北大学的保送名单",
+      image: "scenes/images/qingbei-yale-group-pro.png",
+      description: "凭借优异成绩，Y6 保送到清北大学读博士，进入业勒老师项目组。业勒老师很强，也很忙，他的公司维娜盒欣已经开始把项目推向产业。",
+      options: [
+        { branch: "mentor", title: "紧跟业勒老师", text: "先学会顶级项目怎么运转。", effects: { mentorDependence: 2, ambition: 1, research: 1 }, scene: "Y6 把业勒老师的每句批注都整理成清单，像在学习一套通往强大的语法。" },
+        { branch: "research", title: "确定博士主线", text: "把问题边界钉牢。", effects: { research: 2, clarity: 1, integrity: 1 }, scene: "他没有急着追热点，而是把课题拆成可以被验证的几层。" },
+        { branch: "peer", title: "认识同门同学", text: "不让自己只活在工位上。", effects: { peerTrust: 2, communication: 1, empathy: 1 }, scene: "茶水间的闲聊让他知道，每个优秀的人都有不敢说出口的紧张。" },
+        { branch: "confidence", title: "第一次组会发言", text: "把想法完整讲出来。", effects: { communication: 2, confidence: 1, courage: 1 }, scene: "投影亮起时他还是结巴了两句，但那张图终于替他说完了大半。" }
+      ]
+    },
+    {
+      age: "24 岁",
+      title: "业勒组的深夜灯",
+      image: "scenes/images/yale-night-lab-pro.png",
+      description: "博士第二年，项目组开始卷进论文、合作和公司转化。Y6 的结果不错，却也被节奏推着走。他必须选择自己在组里的位置。",
+      options: [
+        { branch: "research", title: "死磕核心实验", text: "让成果经得起复现。", effects: { research: 2, integrity: 2, ambition: 1 }, scene: "他把漂亮图表暂时放下，一遍遍检查最朴素的实验记录。" },
+        { branch: "mentor", title: "接导师公司任务", text: "提前进入维娜盒欣节奏。", effects: { mentorDependence: 2, ambition: 2, research: 1 }, scene: "公司的会议比实验室更快，他第一次感到业勒老师的世界不只属于论文。" },
+        { branch: "peer", title: "帮同门挡压力", text: "让合作别变成互耗。", effects: { empathy: 2, peerTrust: 2, courage: 1 }, scene: "他在群里把责任拆清楚，语气仍旧温和，却比过去更有分量。" },
+        { branch: "clarity", title: "和导师谈边界", text: "确认博士成果属于谁。", effects: { clarity: 2, integrity: 1, confidence: 1, mentorDependence: -1 }, scene: "谈话很紧张，但业勒老师第一次发现，这个学生不是只会点头。" }
+      ]
+    },
+    {
+      age: "25 岁",
+      title: "颜同学的白板笔",
+      image: "scenes/images/yan-whiteboard-pro.png",
+      description: "颜同学加入合作课题。她聪明、明亮，也能很快看懂 Y6 沉默背后的逻辑。Y6 开始暗恋她，却不知道该把这份心情放在哪里。",
+      options: [
+        { branch: "yan", title: "默默帮她改模型", text: "把喜欢藏进细节。", effects: { yanAttachment: 3, research: 1, communication: -1 }, scene: "他把修好的代码发过去，只写了两个字：好了。屏幕暗下去后，他盯着对话框看了很久。" },
+        { branch: "communication", title: "约她讨论课题", text: "用正常方式靠近。", effects: { communication: 2, yanAttachment: 1, confidence: 1, peerTrust: 1 }, scene: "他们在白板前争论一个变量，Y6 第一次觉得喜欢也可以不那么慌张。" },
+        { branch: "clarity", title: "先问清合作边界", text: "别让情绪污染项目。", effects: { clarity: 2, integrity: 1, peerTrust: 1 }, scene: "他把任务分工写进文档，也把不该越界的期待写进心里。" },
+        { branch: "avoid", title: "故意保持距离", text: "怕暴露心事。", effects: { yanAttachment: 1, clarity: -1, communication: -1, confidence: -1 }, scene: "他开始错开她出现的时间，结果心里反而被她占得更多。" }
+      ]
+    },
+    {
+      age: "26 岁",
+      title: "多角关系的组会后",
+      image: "scenes/images/relationship-crossroads-pro.png",
+      description: "颜同学身边也有其他同学靠近。项目合作、同门友谊和暧昧传闻混在一起，Y6 越想保持体面，越容易被沉默推向误会。",
+      options: [
+        { branch: "yan", title: "冲动表白", text: "把所有压抑一次说完。", effects: { courage: 2, yanAttachment: 2, peerTrust: -2, clarity: -1 }, scene: "话说出口时很痛快，空气安静下来后，他才意识到自己把对方也推到了尴尬处境。" },
+        { branch: "peer", title: "维护同门关系", text: "不把项目组拖进私人情绪。", effects: { peerTrust: 3, empathy: 1, integrity: 1, yanAttachment: -1 }, scene: "他把争议拉回任务本身，承认自己的情绪，但没有让别人为它买单。" },
+        { branch: "clarity", title: "找颜同学坦诚谈一次", text: "确认彼此真实想法。", effects: { communication: 2, clarity: 2, yanAttachment: -1, confidence: 1 }, scene: "谈话并不浪漫，却很清楚。Y6 第一次明白，清楚有时比靠近更温柔。" },
+        { branch: "avoid", title: "把自己埋进论文", text: "用工作逃过关系。", effects: { research: 2, yanAttachment: 2, communication: -2, empathy: -1 }, scene: "他把论文写得更快，却越来越害怕在走廊里听见熟悉的声音。" }
+      ]
+    },
+    {
+      age: "27 岁",
+      title: "放弃颜同学的傍晚",
+      image: "scenes/images/yan-farewell-pro.png",
+      description: "博士后期，Y6 终于意识到自己对颜同学的喜欢夹杂着投射、孤独和不甘。毕业压力逼近，他要决定如何给这段心事收尾。",
+      options: [
+        { branch: "clarity", title: "体面放下", text: "把祝福和距离都说清楚。", effects: { clarity: 3, integrity: 2, yanAttachment: -3, communication: 1 }, scene: "他说谢谢，也说以后会把重心放回自己的人生。颜同学点点头，故事没有戏剧性，却终于结束。" },
+        { branch: "yan", title: "保留最后幻想", text: "不承认已经没有可能。", effects: { yanAttachment: 3, clarity: -2, shaoTrust: -1 }, scene: "他删掉又恢复聊天记录，仿佛只要不彻底放下，某个平行人生就还在。" },
+        { branch: "research", title: "完成博士论文", text: "用成果穿过混乱。", effects: { research: 2, integrity: 1, confidence: 1 }, scene: "论文定稿那晚，他没有庆祝，只是把所有版本归档，像给青春做一次备份。" },
+        { branch: "peer", title: "向同门道歉", text: "修补被情绪影响的关系。", effects: { peerTrust: 2, empathy: 2, communication: 1, yanAttachment: -1 }, scene: "有些关系回不到从前，但一句迟来的道歉让空气终于松了一点。" }
+      ]
+    },
+    {
+      age: "28 岁",
+      title: "维娜盒欣的实习工牌",
+      image: "scenes/images/vena-internship-pro.png",
+      description: "毕业前后，Y6 到业勒老师的公司维娜盒欣实习。公司节奏更快，问题更现实。也是在这里，他遇见了邵同学：直接、可靠，能看见他没说出口的疲惫。",
+      options: [
+        { branch: "shao", title: "和邵同学搭项目", text: "在真实工作里彼此了解。", effects: { shaoTrust: 3, communication: 1, peerTrust: 1, yanAttachment: -1 }, scene: "邵同学把需求拆得很利落，也会在深夜提醒他先吃饭。Y6 感到一种不需要猜的安心。" },
+        { branch: "mentor", title: "继续围着业勒老师转", text: "抓住留用机会。", effects: { mentorDependence: 2, ambition: 2, shaoTrust: -1 }, scene: "他拿到更多任务，却也越来越像业勒老师日程表上的一个延伸。" },
+        { branch: "research", title: "把博士成果产品化", text: "让技术真的可用。", effects: { research: 2, ambition: 1, integrity: 1 }, scene: "从论文到产品的距离比想象更长，他开始学会为用户而不是审稿人解释。" },
+        { branch: "clarity", title: "告诉邵同学过去", text: "不把旧心事藏成雷。", showIf: { min: { communication: 4 } }, effects: { shaoTrust: 2, clarity: 2, yanAttachment: -2, integrity: 1 }, scene: "他说起颜同学时有些笨拙，但邵同学听完后只问：那现在的你想往哪里走？" }
+      ]
+    },
+    {
+      age: "29 岁",
+      title: "留在维娜盒欣",
+      image: "scenes/images/vena-office-pro.png",
+      description: "维娜盒欣给了 Y6 正式 offer。业勒老师希望他留下，邵同学也逐渐成为他生活里稳定的部分。事业、师门和亲密关系第一次同时向他要答案。",
+      options: [
+        { branch: "shao", title: "认真经营关系", text: "把邵同学放进未来计划。", effects: { shaoTrust: 3, communication: 2, clarity: 1, ambition: -1 }, scene: "他们不再只聊项目，也聊城市、家庭和普通日子的安排。Y6 发现承诺不是束缚，而是共同校准方向。" },
+        { branch: "ambition", title: "争取核心岗位", text: "进入公司最重要的项目。", effects: { ambition: 2, research: 1, confidence: 1, shaoTrust: -1 }, scene: "新的权限意味着新的压力，他开始频繁推迟约会，也频繁对自己说以后会补上。" },
+        { branch: "clarity", title: "减少师门依附", text: "建立自己的判断。", effects: { clarity: 2, confidence: 2, mentorDependence: -2, integrity: 1 }, scene: "他仍尊重业勒老师，却不再把每个决定都交给导师背书。" },
+        { branch: "yan", title: "偶尔回看颜同学动态", text: "让旧执念偷偷续命。", effects: { yanAttachment: 2, shaoTrust: -2, clarity: -1 }, scene: "他只是看了一眼，却在邵同学发来消息时心虚地锁了屏。" }
+      ]
+    },
+    {
+      age: "32 岁",
+      title: "项目危机与求婚计划",
+      image: "scenes/images/project-crisis-pro.png",
+      description: "维娜盒欣的关键项目出现风险，业勒老师要求团队压缩验证周期。与此同时，Y6 和邵同学谈到了结婚。人生突然要求他同时成熟。",
+      options: [
+        { branch: "integrity", title: "坚持完整验证", text: "不让速度越过底线。", effects: { integrity: 3, research: 1, courage: 1, ambition: -1 }, scene: "他顶住会议室里的沉默，把风险写进报告。那一刻他知道自己已经不是只会执行的学生。" },
+        { branch: "shao", title: "和邵同学共同决策", text: "把压力摊开讲。", effects: { shaoTrust: 3, communication: 2, empathy: 1 }, scene: "邵同学没有替他做决定，只陪他把每个代价看清楚。Y6 第一次觉得亲密关系也能让人更独立。" },
+        { branch: "mentor", title: "听从业勒老师安排", text: "先保住公司窗口期。", effects: { mentorDependence: 2, ambition: 2, integrity: -2, courage: -1 }, scene: "项目推进得很快，Y6 却在签字后盯着自己的名字看了很久。" },
+        { branch: "avoid", title: "逃进加班", text: "暂时不谈结婚。", effects: { research: 1, shaoTrust: -2, communication: -2, clarity: -1 }, scene: "他把日程排满到没有缝隙，仿佛只要足够忙，就不用回答真正的问题。" }
+      ]
     },
     {
       age: "35 岁",
-      variants: {
-        research: {
-          title: "数据没有照他说谎",
-          image: "scenes/images/data.png",
-          description: "长期研究让 Y6 拿到关键项目，却也让他面对连续失败。异常数据摆在屏幕上，团队等他决定该不该公开。",
-          options: [
-            { branch: "research", title: "公开失败数据", text: "用真实结果换下一次机会。", effects: { integrity: 3, research: 1 }, scene: "他把失败曲线投到大屏上，会议室安静得能听见笔帽落地。" },
-            { branch: "empathy", title: "保护年轻成员", text: "先承认负责人该承担的部分。", effects: { empathy: 2, integrity: 1 }, scene: "他把压力挡在自己面前，让学生们还能继续做下一组实验。" },
-            { branch: "ambition", title: "重组攻关方向", text: "砍掉漂亮但无用的部分。", effects: { courage: 2, ambition: 1, research: 1 }, scene: "一半方案被划掉，留下的线条少了，却更像路。" }
-          ]
-        },
-        empathy: {
-          title: "一间教室变成许多间",
-          image: "scenes/images/team.png",
-          description: "无论支教、公益还是教育研究，Y6 都已经把自己放进了许多人的命运里。现在项目扩大，资源和人心同时紧张。",
-          options: [
-            { branch: "empathy", title: "保留一线课堂", text: "不让系统忘记具体的人。", effects: { empathy: 3, integrity: 1 }, scene: "他每月仍去听一节普通课，提醒团队数字背后有名字。" },
-            { branch: "research", title: "建立评估模型", text: "让善意经得起验证。", effects: { research: 2, empathy: 1 }, scene: "他把热情放进表格和访谈里，试着分辨真正有效的帮助。" },
-            { branch: "ambition", title: "扩展到更多城市", text: "把经验复制出去。", effects: { ambition: 2, courage: 1 }, scene: "新城市的会议室灯火通明，规模让他兴奋，也让他警惕。" }
-          ]
-        },
-        ambition: {
-          title: "增长曲线的阴影",
-          image: "scenes/images/capital.png",
-          description: "平台、公司或项目都开始长大。Y6 站在增长曲线前，发现速度带来的不只是机会，还有被忽略的代价。",
-          options: [
-            { branch: "ambition", title: "继续快速扩张", text: "趁窗口期抢到位置。", effects: { ambition: 3, courage: 1 }, scene: "掌声很密，日程很满，Y6 发现速度也会制造盲区。" },
-            { branch: "research", title: "停下来补技术债", text: "把根基修稳再往前。", effects: { research: 2, integrity: 1 }, scene: "他暂停几个耀眼项目，把工程日志一页页翻回去。" },
-            { branch: "empathy", title: "重建团队规则", text: "让增长不要吞掉人。", effects: { empathy: 2, integrity: 1 }, scene: "他把加班表和离职访谈摆在一起，第一次认真谈疲惫。" }
-          ]
-        }
-      }
-    },
-    {
-      age: "50 岁",
-      variants: {
-        research: {
-          title: "最后一份证据",
-          image: "scenes/images/academy.png",
-          description: "Y6 站在报告厅后台。多年选择把他带回证据本身：要不要把最完整、也最不讨巧的结果交给所有人。",
-          options: [
-            { branch: "research", title: "坚持长期基础问题", text: "把十年数据完整公开。", effects: { research: 3, integrity: 2 }, scene: "他没有讲最热闹的概念，只讲最扎实的证据。" },
-            { branch: "empathy", title: "开放给年轻团队", text: "让后来者少走弯路。", effects: { empathy: 2, research: 1 }, scene: "他把数据库权限交出去，像把一盏灯放到走廊尽头。" },
-            { branch: "ambition", title: "推动国家级平台", text: "把标准和设备一起做大。", effects: { ambition: 2, research: 1 }, scene: "他终于学会在宏大计划里保留一张实验台的位置。" }
-          ]
-        },
-        empathy: {
-          title: "许多人的回声",
-          image: "scenes/images/teaching.png",
-          description: "五十岁时，Y6 收到来自不同城市、学校和实验室的来信。那些被他帮助过的人，反过来构成了他的履历。",
-          options: [
-            { branch: "empathy", title: "退到一线教学", text: "把故事讲给下一代。", effects: { empathy: 3, integrity: 1 }, scene: "他把第一只收音机放在讲台上，教室里传来年轻的笑声。" },
-            { branch: "research", title: "建设开放课程库", text: "让方法可以被反复使用。", effects: { research: 2, empathy: 1 }, scene: "他把课程、数据和失败案例全部整理出来，留给看不见的学生。" },
-            { branch: "ambition", title: "创办公共学院", text: "把小课堂变成制度。", effects: { ambition: 2, empathy: 1 }, scene: "一扇新门打开，后来许多人从这里走向自己的山峰。" }
-          ]
-        },
-        ambition: {
-          title: "掌声之前的选择",
-          image: "scenes/images/vote.png",
-          description: "Y6 的名字已经和项目、公司或平台绑在一起。最后一次关键投票前，他必须决定自己要把影响力投向哪里。",
-          options: [
-            { branch: "ambition", title: "接受资本扩张", text: "用规模追赶窗口期。", effects: { ambition: 3, courage: 1 }, scene: "掌声涌来时，他知道自己选择了最亮也最陡的路。" },
-            { branch: "research", title: "回到技术核心", text: "让增长重新服从问题。", effects: { research: 2, integrity: 1 }, scene: "他把发布会推迟，重新打开那份被搁置的验证报告。" },
-            { branch: "empathy", title: "设立人才基金", text: "把机会交给更多后来者。", effects: { empathy: 2, ambition: 1 }, scene: "他没有只留下公司名字，还留下了一套让新人起跑的规则。" }
-          ]
-        }
-      }
+      title: "自己的名字",
+      image: "scenes/images/own-name-pro.png",
+      description: "Y6 已经在维娜盒欣站稳脚跟。有人仍把他叫作业勒老师的学生，有人开始把他当成独立负责人。邵同学也在等他给未来一个清楚答案。",
+      options: [
+        { branch: "family", title: "向邵同学求婚", text: "选择真实而长期的陪伴。", showIf: { min: { shaoTrust: 6, clarity: 4 } }, effects: { shaoTrust: 3, confidence: 1, yanAttachment: -2, empathy: 1 }, scene: "戒指没有藏得很好，邵同学一眼就看出来了。她笑着说，幸好你这次没有把话留到明天。" },
+        { branch: "leader", title: "成为技术负责人", text: "用自己的判断带团队。", effects: { confidence: 2, communication: 2, research: 1, mentorDependence: -1 }, scene: "他把团队目标写在白板上，终于不再只是复述业勒老师的想法。" },
+        { branch: "research", title: "回到长期研究", text: "在产业里保留问题意识。", effects: { research: 2, integrity: 2, ambition: -1 }, scene: "他申请成立基础研究小组，让产品之外仍有人愿意追问为什么。" },
+        { branch: "yan", title: "仍被过去牵动", text: "在重要关口犹豫。", showIf: { min: { yanAttachment: 5 } }, effects: { yanAttachment: 2, shaoTrust: -3, clarity: -2 }, scene: "旧名字再次出现时，他没有做什么出格的事，却让邵同学看见了他的迟疑。" }
+      ]
     }
   ],
   endings: [
     {
-      id: "runaway_capital",
+      id: "lost_in_yan",
       type: "bad",
-      title: "坏结局：失控扩张的代价",
-      test: { min: { ambition: 10 }, max: { integrity: 3, empathy: 4 } },
-      image: "scenes/images/capital.png",
-      description: "Y6 把速度当成唯一答案，项目和资本一路膨胀，却没有留下足够的审查、伦理和照顾。五十岁那年，公司仍在发布会上闪闪发光，但几起事故让他明白：没有操守和共情托底的野心，会把成功也变成债务。"
+      title: "坏结局：困在颜同学的影子里",
+      test: { min: { yanAttachment: 9 }, max: { clarity: 5, shaoTrust: 5 } },
+      image: "scenes/images/yan-farewell-pro.png",
+      description: "Y6 没有真正走向颜同学，也没有完整走向邵同学。他把许多没说完的话留在心里，最后让过去变成了衡量一切关系的影子。事业仍在继续，但他知道自己错过的不是某个人，而是清醒选择当下的能力。"
     },
     {
-      id: "cold_genius",
+      id: "broken_trust",
       type: "bad",
-      title: "坏结局：孤岛里的天才",
-      test: { min: { research: 10 }, max: { empathy: 3, integrity: 5 } },
-      image: "scenes/images/lab.png",
-      description: "Y6 的论文足够漂亮，数据也足够坚硬，可他越来越少听见别人说话。学生离开，合作者沉默，实验室像一座亮着灯的孤岛。后来有人引用他的成果，却很少有人愿意提起和他一起工作的日子。"
+      title: "坏结局：多角关系后的失信",
+      test: { min: { yanAttachment: 7 }, max: { peerTrust: 3, communication: 4 } },
+      image: "scenes/images/relationship-crossroads-pro.png",
+      description: "博士期间的沉默、误会和冲动逐渐伤到同门关系。Y6 后来明白，喜欢一个人不是错，但把不成熟的情绪交给周围所有人承担，会让最珍贵的信任一点点碎掉。"
     },
     {
-      id: "kindness_burnout",
+      id: "mentor_shadow",
       type: "bad",
-      title: "坏结局：被耗尽的善意",
-      test: { min: { empathy: 10 }, max: { ambition: 4, research: 5, integrity: 4 } },
-      image: "scenes/images/teaching.png",
-      description: "Y6 总是先回应别人的需要，却长期没有为自己的能力、边界和系统建设留下空间。他帮助了许多人，也被无数临时的求助拖垮。五十岁时，他仍被人感激，却已经很难再点亮自己。"
+      title: "坏结局：活成导师的影子",
+      test: { min: { mentorDependence: 8 }, max: { confidence: 5, clarity: 5 } },
+      image: "scenes/images/yale-night-lab-pro.png",
+      description: "Y6 留在维娜盒欣，也做成了不少事，但每个关键判断都绕不开业勒老师的影子。别人说他可靠，他却知道自己很少真正独立决定过方向。"
     },
     {
-      id: "reckless_hero",
+      id: "relationship_burnout",
       type: "bad",
-      title: "坏结局：勇气变成鲁莽",
-      test: { min: { courage: 6, ambition: 7 }, max: { research: 5, integrity: 2 } },
-      image: "scenes/images/crisis.png",
-      description: "Y6 习惯在压力里拍板，也习惯把迟疑看成软弱。几次冒险确实让他冲出重围，直到一次没有被充分验证的决定击穿了底线。那之后，他才明白勇气如果不受证据和操守约束，只是另一种危险。"
+      title: "坏结局：把加班当成逃避",
+      test: { min: { ambition: 8 }, max: { shaoTrust: 4, communication: 4 } },
+      image: "scenes/images/project-crisis-pro.png",
+      description: "项目一个接一个成功，Y6 却习惯用忙碌推迟所有难谈的话。邵同学最终不再等他下班后才想起生活。那天他坐在亮着屏幕的会议室里，第一次觉得胜利也会很空。"
     },
     {
-      id: "stalled_life",
+      id: "risky_company_man",
       type: "bad",
-      title: "坏结局：迟迟没有抵达",
-      test: { max: { research: 4, ambition: 3, courage: 3, integrity: 3 } },
-      image: "scenes/images/river.png",
-      description: "Y6 一直想选择更稳妥的路，却在关键时刻反复绕开难题。五十岁时，他没有犯下大错，也没有真正完成自己想做的事。河水仍旧流过小城，他终于承认：不选择，也是一种选择。"
+      title: "坏结局：窗口期里的代价",
+      test: { min: { ambition: 9, mentorDependence: 6 }, max: { integrity: 4 } },
+      image: "scenes/images/risky-company-pro.png",
+      description: "为了维娜盒欣的窗口期，Y6 一次次压低风险提示。项目短期冲上去了，后来的事故却让他明白：不是所有速度都值得被叫作成长。"
     },
     {
-      id: "academician",
+      id: "shao_partner",
       type: "good",
-      title: "好结局：中国科学院院士",
-      test: { min: { research: 10, integrity: 6 } },
-      image: "scenes/images/academy.png",
-      description: "Y6 因在基础科学领域做出系统性、原创性贡献，并长期坚持公开、严谨的学术规范，当选中国科学院院士。领奖那天，他想起八岁拆开的收音机：原来一生的回声，从那枚小小螺丝就开始了。"
+      title: "好结局：与邵同学相伴的长期人生",
+      test: { min: { shaoTrust: 9, clarity: 6, communication: 6 }, max: { yanAttachment: 5 } },
+      image: "scenes/images/shao-proposal-pro.png",
+      description: "Y6 没有一夜之间变成外向的人，但他学会把重要的话及时说出来。邵同学成为他的女朋友，也成为后来一起面对生活的人。他终于明白，稳定的爱不是替他逃避世界，而是陪他更清楚地走进世界。"
     },
     {
-      id: "public_scientist",
+      id: "independent_leader",
       type: "good",
-      title: "好结局：公共科学的建设者",
-      test: { min: { research: 6, empathy: 5, integrity: 5 } },
-      image: "scenes/images/institute.png",
-      description: "Y6 没有只追逐个人荣誉，而是把数据、课程和设备变成公共基础设施。许多年轻团队从他的开放平台起步，后来又把新的发现归还给更多人。"
+      title: "好结局：维娜盒欣的独立技术负责人",
+      test: { min: { research: 9, confidence: 7, communication: 6, integrity: 6 }, max: { mentorDependence: 7 } },
+      image: "scenes/images/own-name-pro.png",
+      description: "Y6 从业勒老师项目组走出，却没有永远停在学生的位置。他在维娜盒欣建立自己的技术判断，也带出一支愿意讲真话、敢于验证的团队。"
     },
     {
-      id: "founder",
+      id: "clear_scholar",
       type: "good",
-      title: "好结局：技术公司的掌舵者",
-      test: { min: { ambition: 8, courage: 4, integrity: 1 } },
-      image: "scenes/images/capital.png",
-      description: "Y6 把研究经验转化成工程平台，创办的公司改变了一个行业。他没有获得最安静的书房，却在最喧闹的战场里保住了技术底线。"
+      title: "好结局：清醒的长期研究者",
+      test: { min: { research: 10, clarity: 7, integrity: 7 } },
+      image: "scenes/images/clear-scholar-pro.png",
+      description: "Y6 仍然喜欢一个人钻研，但他不再把独处当成逃避。他把博士训练、公司经验和自己的长期问题接在一起，做出扎实而持续的成果。"
     },
     {
-      id: "mentor",
+      id: "warm_builder",
       type: "good",
-      title: "好结局：改变许多人的老师",
-      test: { min: { empathy: 8, integrity: 4 } },
-      image: "scenes/images/teaching.png",
-      description: "Y6 没有把名字刻在最高的奖杯上，却把方法、勇气和诚实交给了一批又一批年轻人。许多年后，有学生说：我的人生，是从听见他那句话开始转弯的。"
+      title: "好结局：会协作的安静建设者",
+      test: { min: { peerTrust: 7, empathy: 6, communication: 6, integrity: 5 } },
+      image: "scenes/images/warm-builder-pro.png",
+      description: "Y6 没有变成最会说漂亮话的人，却成为别人愿意合作的人。他能钻进问题深处，也能在需要时走出来，把复杂的事讲给同伴听。"
     },
     {
-      id: "reformer",
-      type: "good",
-      title: "好结局：开放研究制度的改革者",
-      test: { min: { research: 7, empathy: 6 } },
-      image: "scenes/images/institute.png",
-      description: "Y6 建起开放数据库和共享实验平台，让许多原本彼此独立的团队彼此看见。他的贡献不只是一篇论文，而是一种让知识流动的制度。"
-    },
-    {
-      id: "balanced_builder",
-      type: "good",
-      title: "好结局：稳健的长期主义者",
-      test: { min: { research: 5, empathy: 5, integrity: 3 } },
-      image: "scenes/images/team.png",
-      description: "Y6 没有在某一项属性上走到极端，却把研究、组织、共情和操守稳定地放在同一张桌上。他的成就不总是耀眼，但足够耐久，也足够让身边的人安心。"
-    },
-    {
-      id: "famous_but_tired",
+      id: "career_first_mixed",
       type: "mixed",
-      title: "灰色结局：盛名之下",
-      test: { min: { ambition: 8 }, max: { empathy: 5 } },
-      image: "scenes/images/vote.png",
-      description: "Y6 得到了名声、平台和很多掌声，却越来越难分辨哪些关系还是真实的。他没有彻底失败，也没有真正轻松。人们说他成功，他自己却偶尔怀念那个还能慢慢修收音机的下午。"
+      title: "灰色结局：事业先到，关系迟到",
+      test: { min: { ambition: 8, research: 7 }, max: { shaoTrust: 6 } },
+      image: "scenes/images/career-first-pro.png",
+      description: "Y6 在维娜盒欣拿到了很重要的位置，也终于拥有了更大的平台。只是有些消息没有及时回，有些晚饭没有及时赴约，有些人后来只能变成通讯录里安静的名字。"
     },
     {
-      id: "quiet_scholar",
+      id: "gentle_farewell",
       type: "mixed",
-      title: "灰色结局：安静的研究者",
-      test: { min: { research: 7 }, max: { ambition: 5 } },
-      image: "scenes/images/lab.png",
-      description: "Y6 留在不太被看见的研究角落里，做出了一些扎实但传播有限的工作。他没有站上最高领奖台，也没有被潮水卷走。对他来说，这是一种遗憾，也是一种保全。"
+      title: "灰色结局：体面放下，也独自前行",
+      test: { min: { clarity: 8, integrity: 6 }, max: { shaoTrust: 5, yanAttachment: 4 } },
+      image: "scenes/images/yan-farewell-pro.png",
+      description: "Y6 放下了颜同学，也没有急着把空出来的位置交给任何人。他变得清醒、安静、可靠，只是偶尔仍会想起珑烟市窗边那个不太会表达的自己。"
     },
     {
-      id: "ordinary",
+      id: "ordinary_growth",
       type: "neutral",
-      title: "结局：清醒而普通的一生",
+      title: "结局：慢慢长大的普通人",
       test: {},
-      image: "scenes/images/river.png",
-      description: "Y6 没有站到聚光灯中央，但他保留了选择的能力：知道何时前进，何时停下，何时对一个具体的人负责。五十岁那年，他发现这也是一种完整。"
+      image: "scenes/images/ordinary-growth-pro.png",
+      description: "Y6 没有抵达某个耀眼的标签，但他比过去更了解自己：知道何时钻研，何时表达，何时放下，何时珍惜眼前人。对一个曾经性格偏弱、习惯独处的人来说，这已经是一条很长的路。"
     }
   ]
 };
